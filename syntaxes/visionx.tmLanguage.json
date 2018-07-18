@@ -3819,12 +3819,18 @@
       ]
     },
     "jsx-tag-attribute-name": {
-      "match": "(?x)\n  \\s*\n  ([_$a-zA-Z#@&!][-$\\w]*)\n  (?=\\s|=|/?>|/\\*|//)",
-      "captures": {
-        "1": {
-          "name": "entity.other.attribute-name.js"
-        }
-      }
+      "match": "(?x)\n  \\s*\n  (?:([_$a-zA-Z#@][-$\\w.]*)(:))?\n  ([_$a-zA-Z#@][-$\\w.]*)\n  (?=\\s|=|/?>|/\\*|//)",
+			"captures": {
+				"1": {
+					"name": "entity.other.attribute-name.namespace.js"
+				},
+				"2": {
+					"name": "punctuation.separator.namespace.js"
+				},
+				"3": {
+					"name": "entity.other.attribute-name.js"
+				}
+			}
     },
     "jsx-tag-attribute-assignment": {
       "name": "keyword.operator.assignment.js",
