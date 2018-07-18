@@ -4,8 +4,14 @@ const vscode = require('vscode');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-function activate(context) {
-    console.log('Congratulations, your extension "recore" is now active!');
+function activate() {
+  const conf = vscode.workspace.getConfiguration();
+  conf.update('files.associations', {
+    "*.vx": "visionx",
+    "*.vsx": "visionx"
+  }, true);
+  conf.update('workbench.iconTheme', 'recore-icons', true);
+  console.log('Congratulations, your extension "recore" is now active!');
 }
 exports.activate = activate;
 
