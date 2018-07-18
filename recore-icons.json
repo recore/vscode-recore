@@ -1,0 +1,14 @@
+{
+  "iconDefinitions": {
+    "_f_visionx": {
+      "iconPath": "./images/ext.svg"
+    }
+  },
+  "fileExtensions": {
+    "vsx": "_f_visionx",
+    "vx": "_f_visionx"
+  },
+  "languageIds": {
+    "visionx": "_f_visionx"
+  }
+}
