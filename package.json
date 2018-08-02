@@ -11,7 +11,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "*"
+    "*",
+    "onLanguage:visionx"
   ],
   "repository": {
     "type": "git",
@@ -22,19 +23,21 @@
     "color": "#C80000",
     "theme": "dark"
   },
-  "main": "./extension",
+  "main": "./out/extension",
   "contributes": {
-    "languages": [{
-      "id": "visionx",
-      "aliases": [
-        "Recore VisionX"
-      ],
-      "extensions": [
-        ".vx",
-        ".vsx"
-      ],
-      "configuration": "./language-configuration.json"
-    }],
+    "languages": [
+      {
+        "id": "visionx",
+        "aliases": [
+          "Recore VisionX"
+        ],
+        "extensions": [
+          ".vx",
+          ".vsx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
     "grammars": [
       {
         "language": "visionx",
@@ -48,16 +51,41 @@
         "label": "Recore Icons",
         "path": "./recore-icons.json"
       }
-    ]
+    ],
+    "views": {
+      "recore": [
+        {
+          "id": "recore-ui-library-uxcore",
+          "name": "Uxcore"
+        },
+        {
+          "id": "recore-ui-library-saltui",
+          "name": "SaltUI"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "recore",
+          "title": "Recore",
+          "icon": "images/icon.png"
+        }
+      ]
+    }
   },
   "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "pkg": "vsce package"
+    "pkg": "vsce package",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
     "typescript": "^2.6.1",
     "vscode": "^1.1.6",
-    "eslint": "^4.11.0",
+    "tslint": "^5.8.0",
     "@types/node": "^7.0.43",
     "@types/mocha": "^2.2.42"
   }
