@@ -68,8 +68,8 @@
       "activitybar": [
         {
           "id": "recore",
-          "title": "Recore",
-          "icon": "images/icon.png"
+          "title": "组件市场",
+          "icon": "icons/visionx.svg"
         }
       ]
     }
