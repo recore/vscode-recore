@@ -8,10 +8,15 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
 
   const config = vscode.workspace.getConfiguration();
+
+  // add associations
   config.update('files.associations', {
     "*.vx": "visionx",
-    "*.vsx": "visionx"
+    "*.vsx": "visionx",
+    ...config.get('files.associations'),
   }, true);
+
+  // change iconTheme
   config.update('workbench.iconTheme', 'recore-icons', true);
 
   // Use the console to output diagnostic information (console.log) and errors (console.error)
