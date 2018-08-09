@@ -12,7 +12,8 @@
   ],
   "activationEvents": [
     "*",
-    "onLanguage:visionx"
+    "onLanguage:visionx",
+    "onView:recore-ui-library-uxcore"
   ],
   "repository": {
     "type": "git",
