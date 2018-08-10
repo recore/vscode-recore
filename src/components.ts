@@ -9,7 +9,7 @@ export class CompNodeProvider implements vscode.TreeDataProvider<Component> {
   readonly onDidChangeTreeData: vscode.Event<Component | undefined> = this
     ._onDidChangeTreeData.event;
 
-  constructor(private workspaceRoot: string) {}
+  constructor() {}
 
   refresh(): void {
     this._onDidChangeTreeData.fire();
@@ -58,7 +58,7 @@ export class CompNodeProvider implements vscode.TreeDataProvider<Component> {
       };
 
       const deps = packageJson.content
-        ? packageJson.content.map(dep => toDep(dep))
+        ? packageJson.content.map((dep: any) => toDep(dep))
         : [];
       return deps.concat(deps);
     } else {

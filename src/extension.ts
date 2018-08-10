@@ -24,8 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "recore" is now active!');
 
-  const rootPath = vscode.workspace.rootPath || '';
-	const componentsProvider = new CompNodeProvider(rootPath);
+	const componentsProvider = new CompNodeProvider();
   vscode.window.registerTreeDataProvider('recore-ui-library-uxcore', componentsProvider);
   vscode.commands.registerCommand('extension.openComponentList', component => {
     // current editor
@@ -58,6 +57,10 @@ export function activate(context: vscode.ExtensionContext) {
       insertProps(props, line);
       const sufixInsertPos = new vscode.Position(line + Object.keys(props).length + 1, 0);
       editor.insertSnippet(new vscode.SnippetString('/>'), sufixInsertPos);
+
+      // 格式化
+      vscode.commands.executeCommand('vscode.executeFormatDocumentProvider', editor.document.uri);
+      console.log(editor.document.uri);
     }
   });
 }
