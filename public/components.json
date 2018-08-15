@@ -1,7 +1,7 @@
 {
   "content": [{
-    "_id": "uxcore-button",
-    "_rev": "12392178",
+    "id": "uxcore-button",
+    "rev": "12392178",
     "name": "uxcore-button",
     "description": "uxcore-button ui component for react",
     "latest": "0.4.19",
@@ -18,8 +18,8 @@
     },
     "license": "MIT"
   }, {
-    "_id": "uxcore-form",
-    "_rev": "12392176",
+    "id": "uxcore-form",
+    "rev": "12392176",
     "name": "uxcore-form",
     "description": "uxcore-form ui component for react",
     "latest": "0.5.21",
