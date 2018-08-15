@@ -47,7 +47,6 @@ export function importComponent(component: IComponent) {
     editor.insertSnippet(new vscode.SnippetString('/>'), sufixInsertPos);
 
     // 格式化
-    vscode.commands.executeCommand('vscode.executeFormatDocumentProvider', editor.document.uri);
-    console.log(editor.document.uri);
+    vscode.commands.executeCommand('editor.action.formatDocument', editor.document.uri);
   }
 }
