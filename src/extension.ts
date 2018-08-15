@@ -1,15 +1,15 @@
 'use strict';
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import { workspace, window, commands as Commands, ExtensionContext } from 'vscode';
 import { CompNodeProvider } from './components';
 import { importComponent } from './import';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
 
-  const config = vscode.workspace.getConfiguration();
+  const config = workspace.getConfiguration();
 
   // add associations
   config.update('files.associations', {
@@ -26,8 +26,8 @@ export function activate(context: vscode.ExtensionContext) {
   console.log('Congratulations, your extension "recore" is now active!');
 
 	const componentsProvider = new CompNodeProvider();
-  vscode.window.registerTreeDataProvider('recore-ui-library-uxcore', componentsProvider);
-  vscode.commands.registerCommand('extension.importComponent', importComponent);
+  window.registerTreeDataProvider('recore-ui-library-uxcore', componentsProvider);
+  Commands.registerCommand('extension.importComponent', importComponent);
 }
 
 // this method is called when your extension is deactivated

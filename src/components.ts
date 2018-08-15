@@ -44,23 +44,23 @@ export class CompNodeProvider implements vscode.TreeDataProvider<Component> {
     if (this.pathExists(compPath)) {
       const packageJson = JSON.parse(fs.readFileSync(compPath, "utf-8"));
 
-      const toDep = (item: any): Component => {
+      const toComp = (item: any): Component => {
         return new Component(
           `${item.name} - ${item.latest}`,
           item.description,
           vscode.TreeItemCollapsibleState.None,
           {
-            command: "extension.openComponentList",
+            command: "extension.importComponent",
             title: "",
             arguments: [item]
           }
         );
       };
 
-      const deps = packageJson.content
-        ? packageJson.content.map((dep: any) => toDep(dep))
+      const comps = packageJson.content
+        ? packageJson.content.map((comp: any) => toComp(comp))
         : [];
-      return deps.concat(deps);
+      return comps;
     } else {
       return [];
     }
