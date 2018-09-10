@@ -12,8 +12,7 @@
   ],
   "activationEvents": [
     "*",
-    "onLanguage:visionx",
-    "onView:recore-ui-library-uxcore"
+    "onLanguage:visionx"
   ],
   "repository": {
     "type": "git",
@@ -52,28 +51,7 @@
         "label": "Recore Icons",
         "path": "./recore-icons.json"
       }
-    ],
-    "views": {
-      "recore": [
-        {
-          "id": "recore-ui-library-uxcore",
-          "name": "Uxcore"
-        },
-        {
-          "id": "recore-ui-library-saltui",
-          "name": "SaltUI"
-        }
-      ]
-    },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "recore",
-          "title": "组件市场",
-          "icon": "icons/visionx.svg"
-        }
-      ]
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
