@@ -1,72 +1,126 @@
 {
-    "name": "recore",
-    "displayName": "Recore",
-    "description": "Recore support for Visual Studio Code",
-    "version": "0.1.4",
-    "publisher": "onbing",
-    "engines": {
-      "vscode": "^1.25.0"
-    },
-    "categories": [
-      "Programming Languages"
+  "name": "recore",
+  "displayName": "Recore",
+  "description": "Recore support for Visual Studio Code",
+  "version": "0.1.4",
+  "publisher": "onbing",
+  "engines": {
+    "vscode": "^1.25.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "*",
+    "onLanguage:visionx"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/recore/vscode-recore.git"
+  },
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#C80000",
+    "theme": "dark"
+  },
+  "main": "./out/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "visionx",
+        "aliases": [
+          "Recore VisionX"
+        ],
+        "extensions": [
+          ".vx",
+          ".vsx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
     ],
-    "activationEvents": [
-      "*",
-      "onLanguage:visionx"
+    "grammars": [
+      {
+        "language": "visionx",
+        "scopeName": "text.html.visionx",
+        "path": "./syntaxes/visionx.tmLanguage.json"
+      }
     ],
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/recore/vscode-recore.git"
-    },
-    "icon": "images/icon.png",
-    "galleryBanner": {
-      "color": "#C80000",
-      "theme": "dark"
-    },
-    "main": "./out/extension",
-    "contributes": {
-      "languages": [
-        {
-          "id": "visionx",
-          "aliases": [
-            "Recore VisionX"
+    "iconThemes": [
+      {
+        "id": "recore-icons",
+        "label": "Recore Icons",
+        "path": "./recore-icons.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "plugin configuration",
+      "properties": {
+        "auto-close-tag.activationOnLanguage": {
+          "type": "array",
+          "default": [
+            "visionx"
           ],
-          "extensions": [
-            ".vx",
-            ".vsx"
+          "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"]. Use [\"*\"] to activate for all languages.",
+          "scope": "resource"
+        },
+        "auto-close-tag.excludedTags": {
+          "type": "array",
+          "default": [
+            "area",
+            "base",
+            "br",
+            "col",
+            "command",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "keygen",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr"
           ],
-          "configuration": "./language-configuration.json"
-        }
-      ],
-      "grammars": [
-        {
-          "language": "visionx",
-          "scopeName": "text.html.visionx",
-          "path": "./syntaxes/visionx.tmLanguage.json"
-        }
-      ],
-      "iconThemes": [
-        {
-          "id": "recore-icons",
-          "label": "Recore Icons",
-          "path": "./recore-icons.json"
-        }
-      ]
-    },
-    "scripts": {
-      "vscode:prepublish": "npm run compile",
-      "compile": "tsc -p ./",
-      "watch": "tsc -watch -p ./",
-      "postinstall": "node ./node_modules/vscode/bin/install",
-      "pkg": "vsce package",
-      "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-      "typescript": "^2.6.1",
-      "vscode": "^1.1.6",
-      "tslint": "^5.8.0",
-      "@types/node": "^7.0.43",
-      "@types/mocha": "^2.2.42"
+          "description": "Set the tag list that would not be auto closed.",
+          "scope": "resource"
+        },
+        "auto-close-tag.enableAutoCloseTag": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to insert close tag automatically",
+          "scope": "resource"
+        },
+        "auto-close-tag.enableAutoCloseSelfClosingTag": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to close self-closing tag automatically",
+          "scope": "resource"
+        },
+        "auto-rename-tag.activationOnLanguage": {
+          "type": "array",
+          "default": ["*"],
+          "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"] By default, it is [\"*\"] and will be activated for all languages.",
+          "scope": "resource"
+      }
+      }
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "pkg": "vsce package",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6",
+    "tslint": "^5.8.0",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
   }
-  
+}
