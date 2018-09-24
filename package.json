@@ -23,7 +23,7 @@
     "color": "#C80000",
     "theme": "dark"
   },
-  "main": "./out/extension",
+  "main": "./client/out/extension",
   "contributes": {
     "languages": [
       {
@@ -101,20 +101,24 @@
         },
         "auto-rename-tag.activationOnLanguage": {
           "type": "array",
-          "default": ["*"],
+          "default": [
+            "*"
+          ],
           "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"] By default, it is [\"*\"] and will be activated for all languages.",
           "scope": "resource"
-      }
+        }
       }
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "pkg": "vsce package",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    "vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
+    "compile:client": "tsc -p ./client/tsconfig.json",
+    "compile:server": "tsc -p ./server/tsconfig.json",
+    "watch:client": "tsc -w -p ./client/tsconfig.json",
+    "watch:server": "tsc -w -p ./server/tsconfig.json",
+    "compile": "npm run compile:client && npm run compile:server",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+    "test": "sh ./scripts/e2e.sh"
   },
   "devDependencies": {
     "typescript": "^2.6.1",

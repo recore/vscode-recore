@@ -9,7 +9,7 @@ interface Tag {
 }
 
 export class TagManager {
-  private _word: string | null = "";
+  private _word: string | null = '';
   private _emptyTagOffset: number = 0;
 
   run() {
