@@ -24,7 +24,7 @@ const visionxDirectives = [
   genAttribute('x-for', u, 'Renders the element or template block multiple times based on the source data.'),
   genAttribute('x-each', u, 'Specify an alias and an index alias of iteration item'),
   genAttribute('x-model', u, 'Creates a two-way binding on a form input element or a component.'),
-  genAttribute('x-area', u, 'Creates a two-way binding on a form input element or a component.'),
+  genAttribute('x-area', u, 'Re-rendering when the dependent variable in the element and child element changes'),
   genAttribute('key', u, 'Hint at VNodes identity for VDom diffing, e.g. list rendering'),
   genAttribute('ref', u, 'Register a reference to an element or a child component.'),
 ];
