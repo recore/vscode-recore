@@ -8,7 +8,8 @@ import {
 	LanguageClient,
 	LanguageClientOptions,
 	ServerOptions,
-	TransportKind
+	TransportKind,
+	RevealOutputChannelOn
 } from 'vscode-languageclient';
 
 let client: LanguageClient;
@@ -49,7 +50,7 @@ export function activate(context: ExtensionContext) {
 			options: debugOptions
 		}
   };
-  
+	
   // Options to control the language client
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
@@ -57,12 +58,16 @@ export function activate(context: ExtensionContext) {
 		synchronize: {
 			// Notify the server about file changes to '.clientrc files contained in the workspace
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
-		}
+		},
+		initializationOptions: {
+      config
+		},
+		revealOutputChannelOn: RevealOutputChannelOn.Never
   };
   
   	// Create the language client and start the client.
 	client = new LanguageClient(
-		'recode',
+		'recore',
 		'Recore Language Server',
 		serverOptions,
 		clientOptions

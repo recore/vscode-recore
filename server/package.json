@@ -1,18 +1,29 @@
 {
-	"name": "recore-language-server",
-	"description": "recore-language-server",
-	"version": "0,0,1",
-	"author": "wuyue",
-	"license": "MIT",
-	"engines": {
-		"node": "*"
+  "name": "recore-language-server",
+  "description": "recore-language-server",
+  "version": "0,0,1",
+  "author": "wuyue",
+  "license": "MIT",
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/recore/vscode-recore.git"
+  },
+  "dependencies": {
+		"vscode-languageserver": "^4.1.3",
+		"js-beautify": "^1.7.5",
+    "lodash": "^4.17.4",
+    "vscode-emmet-helper": "^1.1.19",
+    "parse-gitignore": "^0.4.0"
 	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/recore/vscode-recore.git"
+	"devDependencies": {
+		"@types/glob": "^5.0.34",
+		"@types/js-beautify": "0.0.31",
+		"@types/lodash": "^4.14.91",
+    "glob": "^7.1.2",
+    "element-helper-json": "^2.0.2"
 	},
-	"dependencies": {
-		"vscode-languageserver": "^4.1.3"
-	},
-	"scripts": {}
+  "scripts": {}
 }

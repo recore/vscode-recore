@@ -106,6 +106,179 @@
           ],
           "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"] By default, it is [\"*\"] and will be activated for all languages.",
           "scope": "resource"
+        },
+        "recore.colorDecorators.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use color decorators in vue"
+        },
+        "recore.completion.autoImport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include completion for module export and auto import them"
+        },
+        "recore.completion.useScaffoldSnippets": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable recore's built-in scaffolding snippets"
+        },
+        "recore.grammar.customBlocks": {
+          "type": "object",
+          "default": {
+            "docs": "md",
+            "i18n": "json"
+          },
+          "description": "Mapping from custom block tag name to language name. Used for generating grammar to support syntax highlighting for custom blocks."
+        },
+        "recore.validation.template": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate vue-html in <template> using eslint-plugin-vue"
+        },
+        "recore.validation.style": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate css/scss/less/postcss in <style>"
+        },
+        "recore.validation.script": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate js/ts in <script>"
+        },
+        "recore.format.defaultFormatter.html": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "js-beautify-html"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "html formatter of js-beautify"
+          ],
+          "description": "Default formatter for <template> region"
+        },
+        "recore.format.defaultFormatter.css": {
+          "type": "string",
+          "default": "prettier",
+          "enum": [
+            "none",
+            "prettier"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "css formatter using css parser from prettier"
+          ],
+          "description": "Default formatter for <style> region"
+        },
+        "recore.format.defaultFormatter.postcss": {
+          "type": "string",
+          "default": "prettier",
+          "enum": [
+            "none",
+            "prettier"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "postcss formatter using css parser from prettier"
+          ],
+          "description": "Default formatter for <style lang='postcss'> region"
+        },
+        "recore.format.defaultFormatter.scss": {
+          "type": "string",
+          "default": "prettier",
+          "enum": [
+            "none",
+            "prettier"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "scss formatter using scss parser from prettier"
+          ],
+          "description": "Default formatter for <style lang='scss'> region"
+        },
+        "recore.format.defaultFormatter.less": {
+          "type": "string",
+          "default": "prettier",
+          "enum": [
+            "none",
+            "prettier"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "less formatter using postcss parser from prettier"
+          ],
+          "description": "Default formatter for <style lang='less'> region"
+        },
+        "recore.format.defaultFormatter.stylus": {
+          "type": "string",
+          "default": "stylus-supremacy",
+          "enum": [
+            "none",
+            "stylus-supremacy"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "stylus formatter from stylus-supremacy"
+          ],
+          "description": "Default formatter for <style lang='stylus'> region"
+        },
+        "recore.format.defaultFormatter.js": {
+          "type": "string",
+          "default": "prettier",
+          "enum": [
+            "none",
+            "prettier",
+            "vscode-typescript"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "js formatter from prettier",
+            "js formatter from TypeScript"
+          ],
+          "description": "Default formatter for <script> region"
+        },
+        "recore.format.defaultFormatter.ts": {
+          "type": "string",
+          "default": "prettier",
+          "enum": [
+            "none",
+            "prettier",
+            "vscode-typescript"
+          ],
+          "enumDescriptions": [
+            "disable formatting",
+            "ts formatter using typescript parser from prettier",
+            "ts formatter from TypeScript"
+          ],
+          "description": "Default formatter for <script> region"
+        },
+        "recore.format.defaultFormatterOptions": {
+          "type": "object",
+          "default": {
+            "js-beautify-html": {}
+          },
+          "description": "Options for all default formatters"
+        },
+        "recore.format.styleInitialIndent": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to have initial indent for <style> region"
+        },
+        "recore.format.scriptInitialIndent": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to have initial indent for <script> region"
+        },
+        "recore.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and Vue Language Server."
         }
       }
     }
@@ -114,6 +287,7 @@
     "vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
     "compile:client": "tsc -p ./client/tsconfig.json",
     "compile:server": "tsc -p ./server/tsconfig.json",
+    "watch": "npm run watch:client && npm run watch:server",
     "watch:client": "tsc -w -p ./client/tsconfig.json",
     "watch:server": "tsc -w -p ./server/tsconfig.json",
     "compile": "npm run compile:client && npm run compile:server",
@@ -126,5 +300,8 @@
     "tslint": "^5.8.0",
     "@types/node": "^7.0.43",
     "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.116"
   }
 }
