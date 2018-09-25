@@ -147,7 +147,7 @@
         },
         "recore.format.defaultFormatter.html": {
           "type": "string",
-          "default": "none",
+          "default": "js-beautify-html",
           "enum": [
             "none",
             "js-beautify-html"

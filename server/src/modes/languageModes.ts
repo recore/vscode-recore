@@ -17,9 +17,8 @@ import {
 
 import { getLanguageModelCache, LanguageModelCache } from './languageModelCache';
 import { getDocumentRegions, VueDocumentRegions } from './embeddedSupport';
-import { getVueMode } from './vue';
 import { getJavascriptMode } from './script/javascript';
-import { getVueHTMLMode } from './template';
+import { getVisionXMode } from './template';
 import { DocumentContext } from '../types';
 
 export interface LanguageMode {
@@ -64,7 +63,7 @@ export function getLanguageModes(workspacePath: string | null | undefined): Lang
 
   const jsMode = getJavascriptMode(documentRegions, workspacePath);
   let modes: { [k: string]: LanguageMode } = {
-    visionx: getVueHTMLMode(documentRegions, workspacePath, jsMode),
+    visionx: getVisionXMode(documentRegions, workspacePath, jsMode),
     javascript: jsMode,
     tsx: jsMode,
     typescript: jsMode

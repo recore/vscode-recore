@@ -146,7 +146,7 @@ export function doComplete(
           return;
         }
         let codeSnippet = attribute;
-        if (type !== 'v' && value.length) {
+        if (type !== 'x' && value.length) {
           codeSnippet = codeSnippet + value;
         }
         result.items.push({

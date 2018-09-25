@@ -89,7 +89,7 @@ export function collectValuesDefault(
         continue;
       }
       const typeInfo = attr.type;
-      if (typeInfo === 'v') {
+      if (typeInfo === 'x') {
         collector(attribute);
       } else {
         const values = valueSets[typeInfo];

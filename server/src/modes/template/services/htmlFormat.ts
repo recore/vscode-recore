@@ -2,9 +2,6 @@ import * as _ from 'lodash';
 import { TextDocument, Range, TextEdit, Position, FormattingOptions } from 'vscode-languageserver-types';
 import { html as htmlBeautify } from 'js-beautify';
 
-const templateHead = '<template>';
-const templateTail = '</template>';
-
 export function htmlFormat(
   document: TextDocument,
   currRange: Range,
@@ -22,12 +19,11 @@ export function htmlFormat(
     { end_with_newline: false }
   );
 
-  const beautifiedHtml = htmlBeautify(templateHead + value + templateTail, htmlFormattingOptions);
-  const wrappedHtml = beautifiedHtml.substring(templateHead.length, beautifiedHtml.length - templateTail.length);
+  const beautifiedHtml = htmlBeautify(value, htmlFormattingOptions);
   return [
     {
       range,
-      newText: wrappedHtml
+      newText: beautifiedHtml
     }
   ];
 }

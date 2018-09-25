@@ -12,14 +12,14 @@ import {
 
 const u = undefined;
 
-const recoreDirectives = [
+const visionxDirectives = [
   genAttribute(
     'x-show',
     u,
     'Toggle’s the element’s `display` CSS property based on the truthy-ness of the expression value.'
   ),
   genAttribute('x-if', u, 'Conditionally renders the element based on the truthy-ness of the expression value.'),
-  genAttribute('x-else', 'v', 'Denotes the “else block” for `x-if` or a `x-if`/`x-else-if` chain.'),
+  genAttribute('x-else', 'x', 'Denotes the “else block” for `x-if` or a `x-if`/`x-else-if` chain.'),
   genAttribute('x-else-if', u, 'Denotes the “else if block” for `x-if`. Can be chained.'),
   genAttribute('x-for', u, 'Renders the element or template block multiple times based on the source data.'),
   genAttribute('x-each', u, 'Specify an alias and an index alias of iteration item'),
@@ -29,9 +29,9 @@ const recoreDirectives = [
   genAttribute('ref', u, 'Register a reference to an element or a child component.'),
 ];
 
-const vueTags = {
+const visionxTags = {
   block: new HTMLTagSpecification(
-    'A meta component for rendering dynamic components. The actual component to render is determined by the `is` prop.'
+    'A wrapper tag without rendering itself'
   ),
 };
 
@@ -43,14 +43,14 @@ const valueSets = {
 
 export function getVisionXTagProvider(): IHTMLTagProvider {
   return {
-    getId: () => 'vue',
+    getId: () => 'visionx',
     priority: Priority.Framework,
-    collectTags: collector => collectTagsDefault(collector, vueTags),
+    collectTags: collector => collectTagsDefault(collector, visionxTags),
     collectAttributes: (tag: string, collector: AttributeCollector) => {
-      collectAttributesDefault(tag, collector, vueTags, recoreDirectives);
+      collectAttributesDefault(tag, collector, visionxTags, visionxDirectives);
     },
     collectValues: (tag: string, attribute: string, collector: (value: string) => void) => {
-      collectValuesDefault(tag, attribute, collector, vueTags, recoreDirectives, valueSets);
+      collectValuesDefault(tag, attribute, collector, visionxTags, visionxDirectives, valueSets);
     }
   };
 }

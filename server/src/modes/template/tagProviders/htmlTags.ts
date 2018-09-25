@@ -574,7 +574,7 @@ export function getHTML5TagProvider(): IHTMLTagProvider {
     'aria-valuenow',
     'aria-valuetext',
     'accesskey',
-    'class',
+    'className',
     'contenteditable:b',
     'contextmenu',
     'dir:d',

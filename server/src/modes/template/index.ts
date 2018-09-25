@@ -20,17 +20,14 @@ import { DocumentContext } from '../../types';
 
 type DocumentRegionCache = LanguageModelCache<VueDocumentRegions>;
 
-export function getVueHTMLMode(
+export function getVisionXMode(
   documentRegions: DocumentRegionCache,
   workspacePath: string | null | undefined,
   scriptMode: ScriptMode
 ): LanguageMode {
   let tagProviderSettings = getTagProviderSettings(workspacePath);
   let enabledTagProviders = getEnabledTagProviders(tagProviderSettings);
-  const embeddedDocuments = getLanguageModelCache<TextDocument>(10, 60, document =>
-    documentRegions.get(document).getEmbeddedDocument('visionx')
-  );
-  const vueDocuments = getLanguageModelCache<HTMLDocument>(10, 60, document => parseHTMLDocument(document));
+  const visionxDocuments = getLanguageModelCache<HTMLDocument>(10, 60, document => parseHTMLDocument(document));
   let config: any = {};
 
   return {
@@ -44,23 +41,22 @@ export function getVueHTMLMode(
     },
     doComplete(document: TextDocument, position: Position) {
       const tagProviders = enabledTagProviders;
-      return doComplete(document, position, vueDocuments.get(document), tagProviders, config.emmet);
+      return doComplete(document, position, visionxDocuments.get(document), tagProviders, config.emmet);
     },
     doHover(document: TextDocument, position: Position) {
-      const embedded = embeddedDocuments.get(document);
       // const components = scriptMode.findComponents(document);
       // const tagProviders = enabledTagProviders.concat(getComponentTags(components));
       const tagProviders = enabledTagProviders;
-      return doHover(embedded, position, vueDocuments.get(embedded), tagProviders);
+      return doHover(document, position, visionxDocuments.get(document), tagProviders);
     },
     findDocumentHighlight(document: TextDocument, position: Position) {
-      return findDocumentHighlights(document, position, vueDocuments.get(document));
+      return findDocumentHighlights(document, position, visionxDocuments.get(document));
     },
     findDocumentLinks(document: TextDocument, documentContext: DocumentContext) {
       return findDocumentLinks(document, documentContext);
     },
     findDocumentSymbols(document: TextDocument) {
-      return findDocumentSymbols(document, vueDocuments.get(document));
+      return findDocumentSymbols(document, visionxDocuments.get(document));
     },
     format(document: TextDocument, range: Range, formattingOptions: FormattingOptions) {
       if (config.recore.format.defaultFormatter.html === 'none') {
@@ -69,15 +65,14 @@ export function getVueHTMLMode(
       return htmlFormat(document, range, formattingOptions, config);
     },
     findDefinition(document: TextDocument, position: Position) {
-      const embedded = embeddedDocuments.get(document);
       const components = scriptMode.findComponents(document);
-      return findDefinition(embedded, position, vueDocuments.get(embedded), components);
+      return findDefinition(document, position, visionxDocuments.get(document), components);
     },
     onDocumentRemoved(document: TextDocument) {
-      vueDocuments.onDocumentRemoved(document);
+      visionxDocuments.onDocumentRemoved(document);
     },
     dispose() {
-      vueDocuments.dispose();
+      visionxDocuments.dispose();
     }
   };
 }
