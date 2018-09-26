@@ -22,10 +22,9 @@ type DocumentRegionCache = LanguageModelCache<VueDocumentRegions>;
 
 export function getVisionXMode(
   documentRegions: DocumentRegionCache,
-  workspacePath: string | null | undefined,
   scriptMode: ScriptMode
 ): LanguageMode {
-  let tagProviderSettings = getTagProviderSettings(workspacePath);
+  let tagProviderSettings = getTagProviderSettings();
   let enabledTagProviders = getEnabledTagProviders(tagProviderSettings);
   const visionxDocuments = getLanguageModelCache<HTMLDocument>(10, 60, document => parseHTMLDocument(document));
   let config: any = {};
@@ -40,6 +39,8 @@ export function getVisionXMode(
       config = c;
     },
     doComplete(document: TextDocument, position: Position) {
+      // const components = scriptMode.findComponents(document);
+      // const tagProviders = enabledTagProviders.concat(getComponentTags(components));
       const tagProviders = enabledTagProviders;
       return doComplete(document, position, visionxDocuments.get(document), tagProviders, config.emmet);
     },

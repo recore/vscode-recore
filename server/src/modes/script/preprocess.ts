@@ -4,8 +4,9 @@ import * as path from 'path';
 import { getDocumentRegions } from '../embeddedSupport';
 import { TextDocument } from 'vscode-languageserver-types';
 
-export function isVue(filename: string): boolean {
-  return path.extname(filename) === '.vue';
+export function isController(filename: string): boolean {
+  const extname = path.extname(filename);
+  return  extname === '.js' || extname === '.ts';
 }
 
 export function parseVue(text: string): string {
@@ -35,7 +36,7 @@ export function createUpdater() {
     ): ts.SourceFile {
       const sourceFile = clssf(fileName, scriptSnapshot, scriptTarget, version, setNodeParents, scriptKind);
       scriptKindTracker.set(sourceFile, scriptKind);
-      if (isVue(fileName) && !isTSLike(scriptKind)) {
+      if (isController(fileName) && !isTSLike(scriptKind)) {
         modifyVueSource(sourceFile);
       }
       return sourceFile;
@@ -49,7 +50,7 @@ export function createUpdater() {
     ): ts.SourceFile {
       const scriptKind = scriptKindTracker.get(sourceFile);
       sourceFile = ulssf(sourceFile, scriptSnapshot, version, textChangeRange, aggressiveChecks);
-      if (isVue(sourceFile.fileName) && !isTSLike(scriptKind)) {
+      if (isController(sourceFile.fileName) && !isTSLike(scriptKind)) {
         modifyVueSource(sourceFile);
       }
       return sourceFile;

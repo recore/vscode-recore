@@ -16,46 +16,11 @@ export interface CompletionConfiguration {
   [provider: string]: boolean;
 }
 
-export function getTagProviderSettings(workspacePath: string | null | undefined) {
+export function getTagProviderSettings() {
   const settings: CompletionConfiguration = {
     html5: true,
     visionx: true,
-    router: false,
-    element: false,
-    onsen: false,
-    bootstrap: false,
-    buefy: false,
-    vuetify: false,
-    quasar: false
   };
-  if (!workspacePath) {
-    return settings;
-  }
-  try {
-    const packagePath = ts.findConfigFile(workspacePath, ts.sys.fileExists, 'package.json');
-    if(!packagePath) {
-      return settings;
-    }
-    const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf-8'));
-    if (packageJson.dependencies['vue-router']) {
-      settings['router'] = true;
-    }
-    if (packageJson.dependencies['element-ui']) {
-      settings['element'] = true;
-    }
-    if (packageJson.dependencies['vue-onsenui']) {
-      settings['onsen'] = true;
-    }
-    if (packageJson.dependencies['bootstrap-vue']) {
-      settings['bootstrap'] = true;
-    }
-    if (packageJson.dependencies['buefy']) {
-      settings['buefy'] = true;
-    }
-    if (packageJson.dependencies['vuetify']) {
-      settings['vuetify'] = true;
-    }
-  } catch (e) {}
   return settings;
 }
 

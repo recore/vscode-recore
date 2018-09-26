@@ -63,7 +63,7 @@ export function getLanguageModes(workspacePath: string | null | undefined): Lang
 
   const jsMode = getJavascriptMode(documentRegions, workspacePath);
   let modes: { [k: string]: LanguageMode } = {
-    visionx: getVisionXMode(documentRegions, workspacePath, jsMode),
+    visionx: getVisionXMode(documentRegions, jsMode),
     javascript: jsMode,
     tsx: jsMode,
     typescript: jsMode

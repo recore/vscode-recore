@@ -52,12 +52,12 @@ export function getJavascriptMode(
     };
   }
   const jsDocuments = getLanguageModelCache(10, 60, document => {
-    const vueDocument = documentRegions.get(document);
-    return vueDocument.getEmbeddedDocumentByType('script');
+    const visionxDocument = documentRegions.get(document);
+    return visionxDocument.getEmbeddedDocumentByType('script');
   });
   const regionStart = getLanguageModelCache(10, 60, document => {
-    const vueDocument = documentRegions.get(document);
-    return vueDocument.getLanguageRangeByType('script');
+    const visionxDocument = documentRegions.get(document);
+    return visionxDocument.getLanguageRangeByType('script');
   });
 
   const serviceHost = getServiceHost(workspacePath, jsDocuments);
@@ -364,6 +364,7 @@ export function getJavascriptMode(
     findComponents(doc: TextDocument) {
       const { service } = updateCurrentTextDocument(doc);
       const fileFsPath = getFileFsPath(doc.uri);
+      // const fileFsPath = '/Users/xht/xht/hello-recore/src/pages/home/home.ts';
       return findComponents(service, fileFsPath);
     },
     onDocumentRemoved(document: TextDocument) {
