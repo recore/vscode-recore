@@ -1,22 +1,22 @@
-# VSCode Recore 插件
+# Recore Tool for VSCode
 
 ![](https://img.alicdn.com/tfs/TB1XKU_EVOWBuNjy0FiXXXFxVXa-1396-746.png)
 
+## Features
+
+* Syntax Highlighting
+* Automatically Close Tag
+* Automatically Rename Tag
+* Auto Completion
+* Formatting
+
 ## Installation
 
-1. Open the Command Pallete (Ctrl + Shift + P or Cmd + Shift + P) and type `ext install recore.`
-2. Activate the extension from the extensions panel
-3. Associate your '.vx' files with the recore extension by adding this to your settings.json:
-
-```json
-"files.associations": {
-  "*.vx": "recore"
-}
-```
+1. Open the Extensions pane (`Ctrl + Shift + X` or `Cmd + Shift + X`) and type `recore`
+2. Install the extension from the extensions panel
 
 ## Supported languages (file extensions)
 
 * VisionX (.vx)
-
 
 **Enjoy!**
