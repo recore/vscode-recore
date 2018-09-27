@@ -23,7 +23,7 @@ const visionxDirectives = [
   genAttribute('x-else-if', 'jsx', 'Denotes the “else if block” for `x-if`. Can be chained.'),
   genAttribute('x-for', 'jsx', 'Renders the element or template block multiple times based on the source data.'),
   genAttribute('x-each', u, 'Specify an alias and an index alias of iteration item'),
-  genAttribute('x-model', 'jsx', 'Creates a two-way binding on a form input element or a component.'),
+  genAttribute('x-model', u, 'Creates a two-way binding on a form input element or a component.'),
   genAttribute('x-area', 'v', 'Re-rendering when the dependent variable in the element and child element changes'),
   genAttribute('key', u, 'Hint at VNodes identity for VDom diffing, e.g. list rendering'),
   genAttribute('ref', 'jsx', 'Register a reference to an element or a child component.'),
