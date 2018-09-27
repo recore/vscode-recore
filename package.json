@@ -29,7 +29,9 @@
       {
         "id": "visionx",
         "aliases": [
-          "Recore VisionX"
+          "Recore VisionX",
+          "visionx",
+          "VisionX"
         ],
         "extensions": [
           ".vx",
@@ -61,7 +63,7 @@
           "default": [
             "visionx"
           ],
-          "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"]. Use [\"*\"] to activate for all languages.",
+          "description": "Set the languages that the extension will be activated.",
           "scope": "resource"
         },
         "auto-close-tag.excludedTags": {
@@ -81,6 +83,7 @@
             "meta",
             "param",
             "source",
+            "RouterView",
             "track",
             "wbr"
           ],
@@ -102,7 +105,7 @@
         "auto-rename-tag.activationOnLanguage": {
           "type": "array",
           "default": [
-            "*"
+            "visionx"
           ],
           "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"] By default, it is [\"*\"] and will be activated for all languages.",
           "scope": "resource"
