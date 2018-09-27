@@ -1,7 +1,7 @@
 {
   "name": "recore-language-server",
   "description": "recore-language-server",
-  "version": "0,0,1",
+  "version": "0.1.0",
   "author": "wuyue",
   "license": "MIT",
   "engines": {
@@ -16,14 +16,14 @@
 		"js-beautify": "^1.7.5",
     "lodash": "^4.17.4",
     "vscode-emmet-helper": "^1.1.19",
-    "parse-gitignore": "^0.4.0"
+    "parse-gitignore": "^0.4.0",
+    "typescript": "^3.0.3"
 	},
 	"devDependencies": {
 		"@types/glob": "^5.0.34",
 		"@types/js-beautify": "0.0.31",
 		"@types/lodash": "^4.14.91",
-    "glob": "^7.1.2",
-    "element-helper-json": "^2.0.2"
+    "glob": "^7.1.2"
 	},
   "scripts": {}
 }
