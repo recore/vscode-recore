@@ -10,13 +10,14 @@
 * Auto Completion
 * Formatting
 
-## Installation
+## Supported languages
+
+* VisionX (.vx)
+
+## Usage
 
 1. Open the Extensions pane (`Ctrl + Shift + X` or `Cmd + Shift + X`) and type `recore`
 2. Install the extension from the extensions panel
-
-## Supported languages (file extensions)
-
-* VisionX (.vx)
+3. Open `.vx` file and activate the extension
 
 **Enjoy!**
