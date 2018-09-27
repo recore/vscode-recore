@@ -107,20 +107,10 @@
           "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"] By default, it is [\"*\"] and will be activated for all languages.",
           "scope": "resource"
         },
-        "recore.colorDecorators.enable": {
-          "type": "boolean",
-          "default": true,
-          "description": "Use color decorators in vue"
-        },
         "recore.completion.autoImport": {
           "type": "boolean",
           "default": true,
           "description": "Include completion for module export and auto import them"
-        },
-        "recore.completion.useScaffoldSnippets": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable/disable recore's built-in scaffolding snippets"
         },
         "recore.grammar.customBlocks": {
           "type": "object",
@@ -129,21 +119,6 @@
             "i18n": "json"
           },
           "description": "Mapping from custom block tag name to language name. Used for generating grammar to support syntax highlighting for custom blocks."
-        },
-        "recore.validation.template": {
-          "type": "boolean",
-          "default": true,
-          "description": "Validate vue-html in <template> using eslint-plugin-vue"
-        },
-        "recore.validation.style": {
-          "type": "boolean",
-          "default": true,
-          "description": "Validate css/scss/less/postcss in <style>"
-        },
-        "recore.validation.script": {
-          "type": "boolean",
-          "default": true,
-          "description": "Validate js/ts in <script>"
         },
         "recore.format.defaultFormatter.html": {
           "type": "string",
