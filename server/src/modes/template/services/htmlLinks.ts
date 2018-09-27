@@ -85,12 +85,12 @@ export function findDocumentLinks(document: TextDocument, documentContext: Docum
     switch (token) {
       case TokenType.StartTag:
         if (!base) {
-          const tagName = scanner.getTokenText().toLowerCase();
+          const tagName = scanner.getTokenText();
           afterBase = tagName === 'base';
         }
         break;
       case TokenType.AttributeName:
-        const attributeName = scanner.getTokenText().toLowerCase();
+        const attributeName = scanner.getTokenText();
         afterHrefOrSrc = attributeName === 'src' || attributeName === 'href';
         break;
       case TokenType.AttributeValue:

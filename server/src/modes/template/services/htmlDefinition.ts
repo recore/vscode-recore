@@ -17,7 +17,6 @@ export function findDefinition(
     return [];
   }
   function getTagDefinition(tag: string, range: Range, open: boolean): Definition {
-    tag = tag.toLowerCase();
     for (const comp of componentInfos) {
       if (tag === comp.name) {
         return comp.definition || [];
