@@ -138,7 +138,7 @@ export function doComplete(
     const value = isFollowedBy(text, nameEnd, ScannerState.AfterAttributeName, TokenType.DelimiterAssign)
       ? ''
       : '="$1"';
-    const tag = currentTag.toLowerCase();
+    const tag = currentTag;
     tagProviders.forEach(provider => {
       const priority = provider.priority;
       provider.collectAttributes(tag, (attribute, type, documentation) => {
@@ -146,8 +146,10 @@ export function doComplete(
           return;
         }
         let codeSnippet = attribute;
-        if (type !== 'x' && value.length) {
+        if (type !== 'v' && value.length && (type !== 'jsx' && type !== 'event')) {
           codeSnippet = codeSnippet + value;
+        } else if (value.length && (type === 'jsx' || type === 'event')) {
+          codeSnippet = codeSnippet + '={$1}';
         }
         result.items.push({
           label: attribute,
@@ -178,8 +180,8 @@ export function doComplete(
       range = getReplaceRange(valueStart, valueEnd);
       addQuotes = true;
     }
-    const tag = currentTag.toLowerCase();
-    const attribute = currentAttributeName.toLowerCase();
+    const tag = currentTag;
+    const attribute = currentAttributeName;
     tagProviders.forEach(provider => {
       provider.collectValues(tag, attribute, value => {
         const insertText = addQuotes ? '"' + value + '"' : value;
