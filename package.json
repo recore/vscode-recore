@@ -2,7 +2,7 @@
   "name": "recore",
   "displayName": "Recore",
   "description": "Recore support for Visual Studio Code",
-  "version": "0.2.0",
+  "version": "0.2.0-beta",
   "publisher": "onbing",
   "engines": {
     "vscode": "^1.25.0"
@@ -270,7 +270,8 @@
     "watch:server": "tsc -w -p ./server/tsconfig.json",
     "compile": "npm run compile:client && npm run compile:server",
     "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
-    "test": "sh ./scripts/e2e.sh"
+    "test": "sh ./scripts/e2e.sh",
+    "pkg": "vsce package"
   },
   "devDependencies": {
     "typescript": "^2.6.1",
