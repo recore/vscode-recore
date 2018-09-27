@@ -10,7 +10,7 @@ import {
   Priority
 } from './common';
 
-const u = undefined;
+const u: undefined = undefined;
 
 const visionxDirectives = [
   genAttribute(

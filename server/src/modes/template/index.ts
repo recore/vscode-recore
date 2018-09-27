@@ -1,9 +1,8 @@
 import * as _ from 'lodash';
 
-import { LanguageModelCache, getLanguageModelCache } from '../languageModelCache';
+import { getLanguageModelCache } from '../languageModelCache';
 import { TextDocument, Position, Range, FormattingOptions } from 'vscode-languageserver-types';
 import { LanguageMode } from '../languageModes';
-import { VueDocumentRegions } from '../embeddedSupport';
 import { HTMLDocument } from './parser/htmlParser';
 import { doComplete } from './services/htmlCompletion';
 import { doHover } from './services/htmlHover';
@@ -15,13 +14,10 @@ import { parseHTMLDocument } from './parser/htmlParser';
 import { findDefinition } from './services/htmlDefinition';
 import { getTagProviderSettings } from './tagProviders';
 import { ScriptMode } from '../script/javascript';
-import { getComponentTags, getEnabledTagProviders } from './tagProviders';
+import { getEnabledTagProviders } from './tagProviders';
 import { DocumentContext } from '../../types';
 
-type DocumentRegionCache = LanguageModelCache<VueDocumentRegions>;
-
 export function getVisionXMode(
-  documentRegions: DocumentRegionCache,
   scriptMode: ScriptMode
 ): LanguageMode {
   let tagProviderSettings = getTagProviderSettings();

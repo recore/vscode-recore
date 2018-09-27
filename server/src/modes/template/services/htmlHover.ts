@@ -36,7 +36,7 @@ export function doHover(
   function getAttributeHover(tag: string, attribute: string, range: Range): Hover {
     let hover: Hover = NULL_HOVER;
     for (const provider of tagProviders) {
-      provider.collectAttributes(tag, (attr, type, documentation) => {
+      provider.collectAttributes(tag, (attr, _, documentation) => {
         if (attribute !== attr) {
           return;
         }
@@ -62,7 +62,7 @@ export function doHover(
     }
 
     if (tokenEnd === offset) {
-      return TRIVIAL_TOKEN.includes(token);
+      return TRIVIAL_TOKEN.indexOf(token) > -1;
     }
     return false;
   }

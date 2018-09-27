@@ -4,7 +4,7 @@ import Uri from 'vscode-uri';
 import { DocumentContext } from '../../../types';
 
 function stripQuotes(url: string): string {
-  return url.replace(/^'([^']*)'$/, (substr, match1) => match1).replace(/^"([^"]*)"$/, (substr, match1) => match1);
+  return url.replace(/^'([^']*)'$/, (_, match1) => match1).replace(/^"([^"]*)"$/, (_, match1) => match1);
 }
 
 function getWorkspaceUrl(

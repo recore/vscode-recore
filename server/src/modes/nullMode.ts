@@ -1,16 +1,16 @@
 import { LanguageMode } from './languageModes';
 
-export const NULL_HOVER = {
+export const NULL_HOVER: any = {
   contents: []
 };
 
-export const NULL_SIGNATURE = {
+export const NULL_SIGNATURE: any = {
   signatures: [],
   activeSignature: 0,
   activeParameter: 0
 };
 
-export const NULL_COMPLETION = {
+export const NULL_COMPLETION: any = {
   isIncomplete: false,
   items: []
 };

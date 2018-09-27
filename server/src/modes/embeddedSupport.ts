@@ -312,4 +312,5 @@ function getLanguageRangeByType(
       };
     }
   }
+  return undefined;
 }

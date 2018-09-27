@@ -80,7 +80,7 @@ export function getJavascriptMode(
       const fileFsPath = getFileFsPath(doc.uri);
       const offset = scriptDoc.offsetAt(position);
       const triggerChar = doc.getText()[offset - 1];
-      if (NON_SCRIPT_TRIGGERS.includes(triggerChar)) {
+      if (NON_SCRIPT_TRIGGERS.indexOf(triggerChar) > -1) {
         return { isIncomplete: false, items: [] };
       }
       const completions = service.getCompletionsAtPosition(
@@ -129,7 +129,8 @@ export function getJavascriptMode(
         item.data.offset,
         item.label,
         /*formattingOption*/ {},
-        item.data.source
+        item.data.source,
+        undefined
       );
       if (details) {
         item.detail = ts.displayPartsToString(details.displayParts);
@@ -388,7 +389,7 @@ function getSourceDoc(fileName: string, program: ts.Program): TextDocument {
 function languageServiceIncludesFile(ls: ts.LanguageService, documentUri: string): boolean {
   const filePaths = ls.getProgram().getRootFileNames();
   const filePath = getFilePath(documentUri);
-  return filePaths.includes(filePath);
+  return filePaths.indexOf(filePath) > -1;
 }
 
 function convertRange(document: TextDocument, span: ts.TextSpan): Range {
