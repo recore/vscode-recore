@@ -21,8 +21,6 @@ export function findPairedTag(
 ): PairedTag | null {
   let startPositionDic: StartPositionDic = {};
   let startTagDepth: number | null = null;
-  let pairedStartTag: PairedTag;
-  let pairedEndTag: PairedTag;
 
   function inRange(pos: number, start: number, len: number): boolean {
     return start + 1 <= pos && pos <= start + len + 1;
@@ -57,17 +55,17 @@ export function findPairedTag(
       endTag === name &&
       startTagDepth === startPositionDic[endTag].length + 1
     ) {
-      return (pairedEndTag = {
+      return {
         startOffset: startOffset + 2,
         endOffset: startOffset + 2 + endTag.length
-      });
+      };
     } else if (inRange(pos, startOffset + 1, name.length)) {
       if (startPositionDic[startTag] && startPositionDic[startTag].length > 0) {
         startPosition = startPositionDic[startTag].pop() || 0;
-        return (pairedStartTag = {
+        return {
           startOffset: startPosition + 1,
           endOffset: startPosition + 1 + startTag!.length
-        });
+        };
       }
     }
     return null;

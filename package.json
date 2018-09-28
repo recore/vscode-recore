@@ -267,10 +267,6 @@
     "typescript": "^3.0.3",
     "vscode": "^1.1.6",
     "tslint": "^5.8.0",
-    "@types/node": "^7.0.43",
-    "@types/mocha": "^2.2.42"
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.116"
+    "@types/node": "^7.0.43"
   }
 }
