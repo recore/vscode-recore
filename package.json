@@ -249,7 +249,13 @@
           "description": "Whether to have initial indent for <script> region"
         }
       }
-    }
+    },
+    "snippets": [
+      {
+        "language": "visionx",
+        "path": "./snippets/visionx.json"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",

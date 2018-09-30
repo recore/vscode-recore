@@ -1,0 +1,44 @@
+{
+  "RouterView": {
+      "prefix": "<RouterView />",
+      "body": [
+        "<RouterView />"
+      ],
+      "description": "A component that renders the matched component for the given path"
+  },
+  "Link": {
+    "prefix": "<Link>",
+    "body": [
+      "<Link to=\"\"></Link>"
+    ],
+    "description": "Declarative link for application navigation as substitute for `a` tag"
+  },
+  "NavLink": {
+    "prefix": "<NavLink>",
+    "body": [
+      "<NavLink to=\"\" activeClassName=\"\"></NavLink>"
+    ],
+    "description": "Link to navigate user"
+  },
+  "Route": {
+    "prefix": "<Route>",
+    "body": [
+      "<Route path=\"\"></Route>"
+    ],
+    "description": "The element renders page content by matching route path"
+  },
+  "Redirect": {
+    "prefix": "<Redirect>",
+    "body": [
+      "<Redirect to=\"\"></Redirect>"
+    ],
+    "description": "Redirect to other route"
+  },
+  "block": {
+    "prefix": "<block>",
+    "body": [
+      "<block x-if={}></block>"
+    ],
+    "description": "The element renders page content by matching route path"
+  }
+}

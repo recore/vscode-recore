@@ -31,7 +31,7 @@ const visionxDirectives = [
 ];
 
 const visionxTags = {
-  Link: new HTMLTagSpecification('Declarative "link" for application navigation as substitute for "a" tag', [
+  Link: new HTMLTagSpecification('Declarative link for application navigation as substitute for `a"\` tag', [
     genAttribute('to', u, 'The target route of the link. It can be either a string or a location descriptor object.'),
     genAttribute(
       'replace',
@@ -54,7 +54,7 @@ const visionxTags = {
     genAttribute('sensitive', 'v', 'Case sensitivity".'),
     genAttribute('children', 'jsx', 'Stateless Component".'),
   ]),
-  Redirect: new HTMLTagSpecification('Declarative "link" for application navigation as substitute for "a" tag', [
+  Redirect: new HTMLTagSpecification('Redirect to other route', [
     genAttribute('to', u, 'The target route of the link. It can be either a string or a location descriptor object.'),
     genAttribute('push','v','When true, use history.push')
   ]),
