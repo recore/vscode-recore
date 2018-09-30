@@ -9,6 +9,7 @@
 * Automatically Rename Tag
 * Auto Completion
 * Formatting
+* Snippets
 
 ## Supported languages
 
