@@ -57,6 +57,7 @@ export function activate(context: ExtensionContext) {
 		documentSelector: ['visionx'],
 		synchronize: {
 			// Notify the server about file changes to '.clientrc files contained in the workspace
+			configurationSection: ['recore', 'emmet', 'html', 'javascript', 'typescript', 'prettier'],
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		},
 		initializationOptions: {
