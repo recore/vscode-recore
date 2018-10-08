@@ -24,9 +24,6 @@ export function activate(context: ExtensionContext) {
     "*.vsx": "visionx"
   }, true);
 	config.update('workbench.iconTheme', 'recore-icons', true);
-	config.update('emmet.includeLanguages', {
-		"visionx": "html"
-}, true);
 
   // 标签自动闭合、重命名
   const tagManager = new TagManager();
