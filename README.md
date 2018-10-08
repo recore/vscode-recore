@@ -10,6 +10,7 @@
 * Auto Completion
 * Formatting
 * Snippets
+* Emmet
 
 ## Supported languages
 
