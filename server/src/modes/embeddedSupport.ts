@@ -8,7 +8,7 @@ export interface LanguageRange extends Range {
   attributeValue?: boolean;
 }
 
-export interface VueDocumentRegions {
+export interface VisionXDocumentRegions {
   getEmbeddedDocument(languageId: string): TextDocument;
   getEmbeddedDocumentByType(type: EmbeddedType): TextDocument;
   getLanguageRangeByType(type: EmbeddedType): LanguageRange | undefined;
@@ -33,7 +33,7 @@ const defaultType: { [type: string]: string } = {
   style: 'css'
 };
 
-export function getDocumentRegions(document: TextDocument): VueDocumentRegions {
+export function getDocumentRegions(document: TextDocument): VisionXDocumentRegions {
   const regions: EmbeddedRegion[] = [];
   const text = document.getText();
   const scanner = createScanner(text);

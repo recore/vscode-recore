@@ -21,7 +21,7 @@ import {
   FormattingOptions
 } from 'vscode-languageserver-types';
 import { LanguageMode } from '../languageModes';
-import { VueDocumentRegions, LanguageRange } from '../embeddedSupport';
+import { VisionXDocumentRegions, LanguageRange } from '../embeddedSupport';
 import { getServiceHost } from './serviceHost';
 import { prettierify, prettierEslintify } from '../../utils/prettier';
 import { getFileFsPath, getFilePath } from '../../utils/paths';
@@ -42,7 +42,7 @@ export interface ScriptMode extends LanguageMode {
 }
 
 export function getJavascriptMode(
-  documentRegions: LanguageModelCache<VueDocumentRegions>,
+  documentRegions: LanguageModelCache<VisionXDocumentRegions>,
   workspacePath: string | null | undefined
 ): ScriptMode {
   if (!workspacePath) {
@@ -363,8 +363,8 @@ export function getJavascriptMode(
       }
     },
     findController(doc: TextDocument) {
-      // const fileFsPath = getFileFsPath(doc.uri);
-      return findController();
+      const fileFsPath = getFileFsPath(doc.uri);
+      return findController(fileFsPath);
     },
     onDocumentRemoved(document: TextDocument) {
       jsDocuments.onDocumentRemoved(document);

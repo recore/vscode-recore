@@ -1,7 +1,6 @@
 import { HTMLDocument } from '../parser/htmlParser';
 import { TokenType, createScanner } from '../parser/htmlScanner';
 import { TextDocument, Position, Definition } from 'vscode-languageserver-types';
-import { ComponentInfo } from '../../script/findComponents';
 
 const TRIVIAL_TOKEN = [TokenType.StartTagOpen, TokenType.EndTagOpen, TokenType.Whitespace];
 
@@ -9,19 +8,13 @@ export function findDefinition(
   document: TextDocument,
   position: Position,
   htmlDocument: HTMLDocument,
-  componentInfos?: ComponentInfo[]
 ): Definition {
   const offset = document.offsetAt(position);
   const node = htmlDocument.findNodeAt(offset);
   if (!node || !node.tag) {
     return [];
   }
-  function getTagDefinition(tag: string): Definition {
-    for (const comp of componentInfos) {
-      if (tag === comp.name) {
-        return comp.definition || [];
-      }
-    }
+  function getTagDefinition(): Definition {
     return [];
   }
 
@@ -55,7 +48,7 @@ export function findDefinition(
   switch (token) {
     case TokenType.StartTag:
     case TokenType.EndTag:
-      return getTagDefinition(node.tag);
+      return getTagDefinition();
   }
 
   return [];

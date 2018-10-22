@@ -4,9 +4,6 @@ import { getVisionXTagProvider } from './visionxTags';
 export { getControllerTags } from './controllerTags';
 export { IHTMLTagProvider } from './common';
 
-// import * as ts from 'typescript';
-// import * as fs from 'fs';
-
 export let allTagProviders: IHTMLTagProvider[] = [
   getHTML5TagProvider(),
   getVisionXTagProvider(),

@@ -16,7 +16,7 @@ import {
 } from 'vscode-languageserver-types';
 
 import { getLanguageModelCache, LanguageModelCache } from './languageModelCache';
-import { getDocumentRegions, VueDocumentRegions } from './embeddedSupport';
+import { getDocumentRegions, VisionXDocumentRegions } from './embeddedSupport';
 import { getJavascriptMode } from './script/javascript';
 import { getVisionXMode } from './template';
 import { DocumentContext } from '../types';
@@ -56,7 +56,7 @@ export interface LanguageModeRange extends Range {
 }
 
 export function getLanguageModes(workspacePath: string | null | undefined): LanguageModes {
-  const documentRegions = getLanguageModelCache<VueDocumentRegions>(10, 60, document => getDocumentRegions(document));
+  const documentRegions = getLanguageModelCache<VisionXDocumentRegions>(10, 60, document => getDocumentRegions(document));
 
   let modelCaches: LanguageModelCache<any>[] = [];
   modelCaches.push(documentRegions);
