@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-
 import { getLanguageModelCache } from '../languageModelCache';
 import { TextDocument, Position, Range, FormattingOptions } from 'vscode-languageserver-types';
 import { LanguageMode } from '../languageModes';
@@ -11,10 +10,10 @@ import { findDocumentLinks } from './services/htmlLinks';
 import { findDocumentSymbols } from './services/htmlSymbolsProvider';
 import { htmlFormat } from './services/htmlFormat';
 import { parseHTMLDocument } from './parser/htmlParser';
-import { findDefinition } from './services/htmlDefinition';
+// import { findDefinition } from './services/htmlDefinition';
 import { getTagProviderSettings } from './tagProviders';
 import { ScriptMode } from '../script/javascript';
-import { getEnabledTagProviders } from './tagProviders';
+import { getEnabledTagProviders, getControllerTags } from './tagProviders';
 import { DocumentContext } from '../../types';
 
 export function getVisionXMode(
@@ -35,9 +34,8 @@ export function getVisionXMode(
       config = c;
     },
     doComplete(document: TextDocument, position: Position) {
-      // const components = scriptMode.findComponents(document);
-      // const tagProviders = enabledTagProviders.concat(getComponentTags(components));
-      const tagProviders = enabledTagProviders;
+      const controller = scriptMode.findController(document);
+      const tagProviders = enabledTagProviders.concat(getControllerTags(controller));
       return doComplete(document, position, visionxDocuments.get(document), tagProviders, config.emmet);
     },
     doHover(document: TextDocument, position: Position) {
@@ -61,9 +59,10 @@ export function getVisionXMode(
       }
       return htmlFormat(document, range, formattingOptions, config);
     },
-    findDefinition(document: TextDocument, position: Position) {
-      const components = scriptMode.findComponents(document);
-      return findDefinition(document, position, visionxDocuments.get(document), components);
+    findDefinition() {
+      // const components = scriptMode.findController(document);
+      // return findDefinition(document, position, visionxDocuments.get(document), components);
+      return [];
     },
     onDocumentRemoved(document: TextDocument) {
       visionxDocuments.onDocumentRemoved(document);

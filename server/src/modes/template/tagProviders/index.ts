@@ -1,7 +1,7 @@
 import { IHTMLTagProvider } from './common';
 import { getHTML5TagProvider } from './htmlTags';
 import { getVisionXTagProvider } from './visionxTags';
-export { getComponentTags } from './componentTags';
+export { getControllerTags } from './controllerTags';
 export { IHTMLTagProvider } from './common';
 
 // import * as ts from 'typescript';

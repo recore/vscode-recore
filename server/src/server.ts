@@ -29,15 +29,15 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
   }
 
   console.log('Recore Language Server Initialized');
-  const vls = new RLS(workspacePath, connection);
+  const rls = new RLS(workspacePath, connection);
 
   if (initializationOptions) {
-    vls.configure(initializationOptions.config);
+    rls.configure(initializationOptions.config);
   }
 
   const capabilities = {
     textDocumentSync: (TextDocumentSyncKind.Full as any),
-    completionProvider: { resolveProvider: true, triggerCharacters: ['.', ':', '<', '"', '{', '}', '\'', '/', '@', '*', '$'] },
+    completionProvider: { resolveProvider: true, triggerCharacters: ['.', '"', '{', '<', "'", '/', '@', '*'] },
     signatureHelpProvider: { triggerCharacters: ['('] },
     documentFormattingProvider: true,
     hoverProvider: true,

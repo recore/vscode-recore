@@ -5,9 +5,8 @@ import { TextDocument } from 'vscode-languageserver-types';
 import * as parseGitIgnore from 'parse-gitignore';
 
 import { LanguageModelCache } from '../languageModelCache';
-import { createUpdater, parseVue, isController } from './preprocess';
+import { createUpdater, isController } from './preprocess';
 import { getFileFsPath, getFilePath } from '../../utils/paths';
-import * as bridge from './bridge';
 
 // Patch typescript functions to insert `import Vue from 'vue'` and `new Vue` around export default.
 // NOTE: this is a global hack that all ts instances after is changed
@@ -18,28 +17,17 @@ const { createLanguageServiceSourceFile, updateLanguageServiceSourceFile } = cre
 const vueSys: ts.System = {
   ...ts.sys,
   fileExists(path: string) {
-    if (isVueProject(path)) {
-      return ts.sys.fileExists(path.slice(0, -3));
-    }
     return ts.sys.fileExists(path);
   },
   readFile(path, encoding) {
-    if (isVueProject(path)) {
-      const fileText = ts.sys.readFile(path.slice(0, -3), encoding);
-      return fileText ? parseVue(fileText) : fileText;
-    } else {
-      const fileText = ts.sys.readFile(path, encoding);
-      return fileText;
-    }
+    const fileText = ts.sys.readFile(path, encoding);
+    return fileText;
   }
 };
 
 if (ts.sys.realpath) {
   const realpath = ts.sys.realpath;
   vueSys.realpath = function(path) {
-    if (isVueProject(path)) {
-      return realpath(path.slice(0, -3)) + '.ts';
-    }
     return realpath(path);
   };
 }
@@ -62,7 +50,6 @@ export function getServiceHost(workspacePath: string, jsDocuments: LanguageModel
 
   const parsedConfig = getParsedConfig(workspacePath);
   const files = parsedConfig.fileNames;
-  const isOldVersion = inferIsOldVersion(workspacePath);
   const compilerOptions = {
     ...defaultCompilerOptions,
     ...parsedConfig.options
@@ -109,9 +96,6 @@ export function getServiceHost(workspacePath: string, jsDocuments: LanguageModel
     getCompilationSettings: () => compilerOptions,
     getScriptFileNames: () => files,
     getScriptVersion(fileName) {
-      if (fileName === bridge.fileName) {
-        return '0';
-      }
       const normalizedFileFsPath = getNormalizedFileFsPath(fileName);
       const version = versions.get(normalizedFileFsPath);
       return version ? version.toString() : '0';
@@ -125,9 +109,6 @@ export function getServiceHost(workspacePath: string, jsDocuments: LanguageModel
           jsDocuments.get(TextDocument.create(uri.toString(), 'JavaScript', 0, ts.sys.readFile(fileName) || ''));
         return getScriptKind(doc.languageId);
       } else {
-        if (fileName === bridge.fileName) {
-          return ts.Extension.Ts;
-        }
         // NOTE: Typescript 2.3 should export getScriptKindFromFileName. Then this cast should be removed.
         return (ts as any).getScriptKindFromFileName(fileName);
       }
@@ -144,12 +125,6 @@ export function getServiceHost(workspacePath: string, jsDocuments: LanguageModel
       // in the normal case, delegate to ts.resolveModuleName
       // in the relative-imported.vue case, manually build a resolved filename
       return moduleNames.map(name => {
-        if (name === bridge.moduleName) {
-          return {
-            resolvedFileName: bridge.fileName,
-            extension: ts.Extension.Ts
-          };
-        }
         if (path.isAbsolute(name) || !isController(name)) {
           return ts.resolveModuleName(name, containingFile, compilerOptions, ts.sys).resolvedModule;
         }
@@ -173,22 +148,9 @@ export function getServiceHost(workspacePath: string, jsDocuments: LanguageModel
       });
     },
     getScriptSnapshot: (fileName: string) => {
-      if (fileName === bridge.fileName) {
-        const text = isOldVersion ? bridge.oldContent : bridge.content;
-        return {
-          getText: (start, end) => text.substring(start, end),
-          getLength: () => text.length,
-          getChangeRange: () => void 0
-        };
-      }
       const normalizedFileFsPath = getNormalizedFileFsPath(fileName);
       const doc = scriptDocs.get(normalizedFileFsPath);
       let fileText = doc ? doc.getText() : ts.sys.readFile(normalizedFileFsPath) || '';
-      if (!doc && isController(fileName)) {
-        // Note: This is required in addition to the parsing in embeddedSupport because
-        // this works for .vue files that aren't even loaded by VS Code yet.
-        // fileText = parseVue(fileText);
-      }
       return {
         getText: (start, end) => fileText.substring(start, end),
         getLength: () => fileText.length,
@@ -215,10 +177,6 @@ function getNormalizedFileFsPath(fileName: string): string {
   return Uri.file(fileName).fsPath;
 }
 
-function isVueProject(path: string) {
-  return path.endsWith('.vue.ts') && !path.includes('node_modules');
-}
-
 function defaultIgnorePatterns(workspacePath: string) {
   const nodeModules = ['node_modules', '**/node_modules/*'];
   const gitignore = ts.findConfigFile(workspacePath, ts.sys.fileExists, '.gitignore');
@@ -232,20 +190,6 @@ function defaultIgnorePatterns(workspacePath: string) {
 
 function getScriptKind(langId: string): ts.ScriptKind {
   return langId === 'typescript' ? ts.ScriptKind.TS : langId === 'tsx' ? ts.ScriptKind.TSX : ts.ScriptKind.JS;
-}
-
-function inferIsOldVersion(workspacePath: string): boolean {
-  const packageJSONPath = ts.findConfigFile(workspacePath, ts.sys.fileExists, 'package.json');
-  try {
-    const packageJSON = packageJSONPath && JSON.parse(ts.sys.readFile(packageJSONPath)!);
-    const vueStr = packageJSON.dependencies.vue || packageJSON.devDependencies.vue;
-    // use a sloppy method to infer version, to reduce dep on semver or so
-    const vueDep = vueStr.match(/\d+\.\d+/)[0];
-    const sloppyVersion = parseFloat(vueDep);
-    return sloppyVersion < 2.5;
-  } catch (e) {
-    return true;
-  }
 }
 
 function getParsedConfig(workspacePath: string) {

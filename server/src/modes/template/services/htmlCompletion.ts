@@ -135,9 +135,9 @@ export function doComplete(
     const filterPrefix = execArray ? execArray[0] : '';
     const start = filterPrefix ? nameStart + 1 : nameStart;
     const range = getReplaceRange(start, nameEnd);
-    const value = isFollowedBy(text, nameEnd, ScannerState.AfterAttributeName, TokenType.DelimiterAssign)
-      ? ''
-      : '="$1"';
+    // const value = isFollowedBy(text, nameEnd, ScannerState.AfterAttributeName, TokenType.DelimiterAssign)
+    //   ? ''
+    //   : '="$1"';
     const tag = currentTag;
     tagProviders.forEach(provider => {
       const priority = provider.priority;
@@ -145,12 +145,13 @@ export function doComplete(
         if ((type === 'event' && filterPrefix !== '@') || (type !== 'event' && filterPrefix === '@')) {
           return;
         }
-        let codeSnippet = attribute;
-        if (type !== 'v' && value.length && (type !== 'jsx' && type !== 'event')) {
-          codeSnippet = codeSnippet + value;
-        } else if (value.length && (type === 'jsx' || type === 'event')) {
-          codeSnippet = codeSnippet + '={$1}';
-        }
+        const codeSnippet = attribute;
+        // let codeSnippet = attribute;
+        // if (type !== 'v' && value.length && (type !== 'jsx' && type !== 'event')) {
+        //   codeSnippet = codeSnippet + value;
+        // } else if (value.length && (type === 'jsx' || type === 'event')) {
+        //   codeSnippet = codeSnippet + '={$1}';
+        // }
         result.items.push({
           label: attribute,
           kind: type === 'event' ? CompletionItemKind.Function : CompletionItemKind.Value,
@@ -167,9 +168,9 @@ export function doComplete(
   function collectAttributeValueSuggestions(valueStart: number, valueEnd?: number): CompletionList {
     let range: Range;
     let addQuotes: boolean;
-    if (valueEnd && offset > valueStart && offset <= valueEnd && text[valueStart] === '"') {
+    if (valueEnd && offset > valueStart && offset <= valueEnd && (text[valueStart] === '"' || text[valueStart] === '{')) {
       // inside attribute
-      if (valueEnd > offset && text[valueEnd - 1] === '"') {
+      if (valueEnd > offset && (text[valueEnd - 1] === '"' || text[valueEnd - 1] === '}')) {
         valueEnd--;
       }
       const wsBefore = getWordStart(text, offset, valueStart + 1);
@@ -184,11 +185,11 @@ export function doComplete(
     const attribute = currentAttributeName;
     tagProviders.forEach(provider => {
       provider.collectValues(tag, attribute, value => {
-        const insertText = addQuotes ? '"' + value + '"' : value;
+        const insertText = addQuotes ? '{' + value + '}' : value;
         result.items.push({
           label: value,
           filterText: insertText,
-          kind: CompletionItemKind.Unit,
+          kind: CompletionItemKind.Variable,
           textEdit: TextEdit.replace(range, insertText),
           insertTextFormat: InsertTextFormat.PlainText
         });

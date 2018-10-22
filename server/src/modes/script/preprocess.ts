@@ -1,19 +1,9 @@
 import * as ts from 'typescript';
 import * as path from 'path';
 
-import { getDocumentRegions } from '../embeddedSupport';
-import { TextDocument } from 'vscode-languageserver-types';
-
 export function isController(filename: string): boolean {
   const extname = path.extname(filename);
   return  extname === '.js' || extname === '.ts';
-}
-
-export function parseVue(text: string): string {
-  const doc = TextDocument.create('test://test/test.vue', 'vue', 0, text);
-  const regions = getDocumentRegions(doc);
-  const script = regions.getEmbeddedDocumentByType('script');
-  return script.getText() || 'export default {};';
 }
 
 function isTSLike(scriptKind: ts.ScriptKind | undefined) {

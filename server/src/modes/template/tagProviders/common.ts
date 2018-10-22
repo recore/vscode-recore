@@ -109,13 +109,11 @@ export function collectValuesDefault(
     }
   }
   processAttributes(globalAttributes);
-  // TODO: add custom tag support
-  // if (customTags) {
-  //   var customTagAttributes = customTags[tag];
-  //   if (customTagAttributes) {
-  //     processAttributes(customTagAttributes);
-  //   }
-  // }
+
+  const globalValues = valueSets.g;
+  if (globalValues) {
+    globalValues.forEach(collector);
+  }
 }
 
 export function genAttribute(label: string, type?: string, documentation?: string): Attribute {

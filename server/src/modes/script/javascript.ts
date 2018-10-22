@@ -23,9 +23,9 @@ import {
 import { LanguageMode } from '../languageModes';
 import { VueDocumentRegions, LanguageRange } from '../embeddedSupport';
 import { getServiceHost } from './serviceHost';
-import { findComponents, ComponentInfo } from './findComponents';
 import { prettierify, prettierEslintify } from '../../utils/prettier';
 import { getFileFsPath, getFilePath } from '../../utils/paths';
+import { IController, findController } from '../template/parser/controllerParser';
 
 import Uri from 'vscode-uri';
 import * as ts from 'typescript';
@@ -38,7 +38,7 @@ import { nullMode, NULL_SIGNATURE } from '../nullMode';
 const NON_SCRIPT_TRIGGERS = ['<', '/', '*', ':'];
 
 export interface ScriptMode extends LanguageMode {
-  findComponents(document: TextDocument): ComponentInfo[];
+  findController(document: TextDocument): IController;
 }
 
 export function getJavascriptMode(
@@ -48,7 +48,7 @@ export function getJavascriptMode(
   if (!workspacePath) {
     return {
       ...nullMode,
-      findComponents: () => []
+      findController: () => null
     };
   }
   const jsDocuments = getLanguageModelCache(10, 60, document => {
@@ -362,11 +362,9 @@ export function getJavascriptMode(
         return result;
       }
     },
-    findComponents(doc: TextDocument) {
-      const { service } = updateCurrentTextDocument(doc);
-      const fileFsPath = getFileFsPath(doc.uri);
-      // const fileFsPath = '/Users/xht/xht/hello-recore/src/pages/home/home.ts';
-      return findComponents(service, fileFsPath);
+    findController(doc: TextDocument) {
+      // const fileFsPath = getFileFsPath(doc.uri);
+      return findController();
     },
     onDocumentRemoved(document: TextDocument) {
       jsDocuments.onDocumentRemoved(document);

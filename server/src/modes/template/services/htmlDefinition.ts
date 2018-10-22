@@ -9,7 +9,7 @@ export function findDefinition(
   document: TextDocument,
   position: Position,
   htmlDocument: HTMLDocument,
-  componentInfos: ComponentInfo[]
+  componentInfos?: ComponentInfo[]
 ): Definition {
   const offset = document.offsetAt(position);
   const node = htmlDocument.findNodeAt(offset);

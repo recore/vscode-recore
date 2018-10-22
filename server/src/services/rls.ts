@@ -159,7 +159,7 @@ export class RLS {
     const doc = this.documentService.getDocument(textDocument.uri);
     const mode = this.languageModes.getModeAtPosition(doc, position);
     if (mode && mode.findDefinition) {
-      return mode.findDefinition(doc, position);
+      // return mode.findDefinition(doc, position);
     }
     return [];
   }
