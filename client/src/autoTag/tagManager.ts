@@ -85,10 +85,10 @@ export class TagManager {
     }
     let languageId = editor.document.languageId;
     let config = vscode.workspace.getConfiguration(
-      "auto-rename-tag",
+      "recore",
       editor.document.uri
     );
-    let languages = config.get<string[]>("activationOnLanguage", ["*"]);
+    let languages = config.get<string[]>("autoTag.activationOnLanguage", ["*"]);
     if (
       languages.indexOf("*") === -1 &&
       languages.lastIndexOf(languageId) === -1

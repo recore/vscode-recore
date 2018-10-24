@@ -17,24 +17,24 @@ export function insertAutoCloseTag(
   }
 
   let config = vscode.workspace.getConfiguration(
-    "auto-close-tag",
+    "recore",
     editor.document.uri
   );
-  if (!config.get<boolean>("enableAutoCloseTag", true)) {
+  if (!config.get<boolean>("autoTag.enableAutoCloseTag", true)) {
     return;
   }
 
   let languageId = editor.document.languageId;
-  let languages = config.get<string[]>("activationOnLanguage", ["*"]);
+  let languages = config.get<string[]>("autoTag.activationOnLanguage", ["*"]);
   if (languages.indexOf("*") === -1 && languages.indexOf(languageId) === -1) {
     return;
   }
 
   let selection = editor.selection;
   let originalPosition = selection.start.translate(0, 1);
-  let excludedTags = config.get<string[]>("excludedTags", []);
+  let excludedTags = config.get<string[]>("autoTag.excludedTags", []);
   let enableAutoCloseSelfClosingTag = config.get<boolean>(
-    "enableAutoCloseSelfClosingTag",
+    "autoTag.enableAutoCloseSelfClosingTag",
     true
   );
 
@@ -75,7 +75,8 @@ export function insertAutoCloseTag(
       result !== null &&
       (occurrenceCount(result[0], "'") % 2 === 0 &&
         occurrenceCount(result[0], '"') % 2 === 0 &&
-        occurrenceCount(result[0], "`") % 2 === 0)
+        occurrenceCount(result[0], "`") % 2 === 0 &&
+        occurrenceCount(result[0], "{") === occurrenceCount(result[0], "}"))
     ) {
       if (result[2] === ">") {
         if (excludedTags.indexOf(result[1]) === -1) {

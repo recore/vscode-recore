@@ -58,7 +58,7 @@
       "type": "object",
       "title": "plugin configuration",
       "properties": {
-        "auto-close-tag.activationOnLanguage": {
+        "recore.autoTag.activationOnLanguage": {
           "type": "array",
           "default": [
             "visionx"
@@ -66,7 +66,7 @@
           "description": "Set the languages that the extension will be activated.",
           "scope": "resource"
         },
-        "auto-close-tag.excludedTags": {
+        "recore.autoTag.excludedTags": {
           "type": "array",
           "default": [
             "area",
@@ -90,24 +90,16 @@
           "description": "Set the tag list that would not be auto closed.",
           "scope": "resource"
         },
-        "auto-close-tag.enableAutoCloseTag": {
+        "recore.autoTag.enableAutoCloseTag": {
           "type": "boolean",
           "default": true,
           "description": "Whether to insert close tag automatically",
           "scope": "resource"
         },
-        "auto-close-tag.enableAutoCloseSelfClosingTag": {
+        "recore.autoTag.enableAutoCloseSelfClosingTag": {
           "type": "boolean",
           "default": true,
           "description": "Whether to close self-closing tag automatically",
-          "scope": "resource"
-        },
-        "auto-rename-tag.activationOnLanguage": {
-          "type": "array",
-          "default": [
-            "visionx"
-          ],
-          "description": "Set the languages that the extension will be activated.  e.g. [\"html\",\"xml\",\"php\"] By default, it is [\"*\"] and will be activated for all languages.",
           "scope": "resource"
         },
         "recore.completion.autoImport": {
