@@ -9,7 +9,6 @@
 
 - Add feature of dynamic completion of VisionX Tags
 - Add feature of Emmet
-- Add feature of closing tag automatically when typing `</`
 
 ### 0.1.8 | 2018-09-30
 
