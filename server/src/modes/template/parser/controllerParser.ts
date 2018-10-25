@@ -21,7 +21,8 @@ export function findController(vxPath: string): IController {
       sourceType: "module",
       plugins: [
         "decorators-legacy",
-        "classProperties"
+        "classProperties",
+        "typescript"
       ]
     });
     ctlInfo = getInfoFromController(ctlSource);
@@ -37,7 +38,8 @@ export function findController(vxPath: string): IController {
       sourceType: "module",
       plugins: [
         "decorators-legacy",
-        "classProperties"
+        "classProperties",
+        "typescript"
       ]
     });
     bsInfo = getInfoFromBootStrap(bsSource);

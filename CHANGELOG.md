@@ -1,5 +1,10 @@
 # Change Log
 
+### 0.1.10 | 2018-10-25
+
+- Fix bug of controller in typescript
+- Fix bug in the case of typing `>` in expression
+
 ### 0.1.9 | 2018-10-22
 
 - Add feature of dynamic completion of VisionX Tags

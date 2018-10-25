@@ -2,8 +2,8 @@
   "name": "recore",
   "displayName": "Recore",
   "description": "Recore support for Visual Studio Code",
-  "version": "0.1.9",
-  "publisher": "onbing",
+  "version": "0.1.10",
+  "publisher": "xux",
   "engines": {
     "vscode": "^1.20.0"
   },

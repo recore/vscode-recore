@@ -135,9 +135,6 @@ export function doComplete(
     const filterPrefix = execArray ? execArray[0] : '';
     const start = filterPrefix ? nameStart + 1 : nameStart;
     const range = getReplaceRange(start, nameEnd);
-    // const value = isFollowedBy(text, nameEnd, ScannerState.AfterAttributeName, TokenType.DelimiterAssign)
-    //   ? ''
-    //   : '="$1"';
     const tag = currentTag;
     tagProviders.forEach(provider => {
       const priority = provider.priority;
@@ -145,17 +142,10 @@ export function doComplete(
         if ((type === 'event' && filterPrefix !== '@') || (type !== 'event' && filterPrefix === '@')) {
           return;
         }
-        const codeSnippet = attribute;
-        // let codeSnippet = attribute;
-        // if (type !== 'v' && value.length && (type !== 'jsx' && type !== 'event')) {
-        //   codeSnippet = codeSnippet + value;
-        // } else if (value.length && (type === 'jsx' || type === 'event')) {
-        //   codeSnippet = codeSnippet + '={$1}';
-        // }
         result.items.push({
           label: attribute,
           kind: type === 'event' ? CompletionItemKind.Function : CompletionItemKind.Value,
-          textEdit: TextEdit.replace(range, codeSnippet),
+          textEdit: TextEdit.replace(range, attribute),
           insertTextFormat: InsertTextFormat.Snippet,
           sortText: priority + attribute,
           documentation
