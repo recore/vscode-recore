@@ -67,50 +67,6 @@ function genTag(label: string, attrs?: string[]): HTMLTagSpecification {
 
 // HTML tag information sourced from http://www.w3.org/TR/2015/WD-html51-20151008/
 export const HTML_TAGS: ITagSet = {
-  // The root element
-  html: genTag('The html element represents the root of an HTML document.', ['manifest']),
-  // Document metadata
-  head: genTag('The head element represents a collection of metadata for the Document.'),
-  title: genTag(
-    "The title element represents the document's title or name. Authors should use titles that identify their documents even when they are used out of context, for example in a user's history or bookmarks, or in search results. The document's title is often different from its first heading, since the first heading does not have to stand alone when taken out of context."
-  ),
-  base: genTag(
-    'The base element allows authors to specify the document base URL for the purposes of resolving relative URLs, and the name of the default browsing context for the purposes of following hyperlinks. The element does not represent any content beyond this information.',
-    ['href', 'target']
-  ),
-  link: genTag('The link element allows authors to link their document to other resources.', [
-    'href',
-    'crossorigin:xo',
-    'rel',
-    'media',
-    'hreflang',
-    'type',
-    'sizes'
-  ]),
-  meta: genTag(
-    'The meta element represents various kinds of metadata that cannot be expressed using the title, base, link, style, and script elements.',
-    ['name', 'http-equiv', 'content', 'charset']
-  ),
-  style: genTag(
-    'The style element allows authors to embed style information in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.',
-    ['media', 'nonce', 'type', 'scoped:v']
-  ),
-  // Sections
-  body: genTag('The body element represents the content of the document.', [
-    'onafterprint',
-    'onbeforeprint',
-    'onbeforeunload',
-    'onhashchange',
-    'onlanguagechange',
-    'onmessage',
-    'onoffline',
-    'ononline',
-    'onpagehide',
-    'onpageshow',
-    'onpopstate',
-    'onstorage',
-    'onunload'
-  ]),
   article: genTag(
     'The article element represents a complete, or self-contained, composition in a document, page, application, or site and that is, in principle, independently distributable or reusable, e.g. in syndication. This could be a forum post, a magazine or newspaper article, a blog entry, a user-submitted comment, an interactive widget or gadget, or any other independent item of content. Each article should be identified, typically by including a heading (h1–h6 element) as a child of the article element.'
   ),
@@ -185,7 +141,7 @@ export const HTML_TAGS: ITagSet = {
   // Text-level semantics
   a: genTag(
     'If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.',
-    ['href', 'target', 'download', 'ping', 'rel', 'hreflang', 'type']
+    ['href', 'target', 'download', 'ping', 'rel', 'hrefLang', 'type']
   ),
   em: genTag('The em element represents stress emphasis of its contents.'),
   strong: genTag('The strong element represents strong importance, seriousness, or urgency for its contents.'),
@@ -221,7 +177,7 @@ export const HTML_TAGS: ITagSet = {
   //  'The data element represents its contents, along with a machine-readable form of those contents in the value attribute.'),
   time: genTag(
     'The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.',
-    ['datetime']
+    ['dateTime']
   ),
   code: genTag(
     'The code element represents a fragment of computer code. This could be an XML element name, a file name, a computer program, or any other string that a computer would recognize.'
@@ -260,7 +216,7 @@ export const HTML_TAGS: ITagSet = {
   wbr: genTag('The wbr element represents a line break opportunity.'),
   // Edits
   ins: genTag('The ins element represents an addition to the document.'),
-  del: genTag('The del element represents a removal from the document.', ['cite', 'datetime']),
+  del: genTag('The del element represents a removal from the document.', ['cite', 'dateTime']),
   // Embedded content
   picture: genTag(
     'The picture element is a container which provides multiple sources to its contained img element to allow authors to declaratively control or give hints to the user agent about which image resource to use, based on the screen pixel density, viewport size, image format, and other factors. It represents its children.'
@@ -269,19 +225,19 @@ export const HTML_TAGS: ITagSet = {
     'alt',
     'src',
     'srcset',
-    'crossorigin:xo',
-    'usemap',
+    'crossOrigin:xo',
+    'useMap',
     'ismap:v',
     'width',
     'height'
   ]),
   iframe: genTag('The iframe element represents a nested browsing context.', [
     'src',
-    'srcdoc',
+    'srcDoc',
     'name',
     'sandbox:sb',
     'seamless:v',
-    'allowfullscreen:v',
+    'allowFullScreen:v',
     'width',
     'height'
   ]),
@@ -291,7 +247,7 @@ export const HTML_TAGS: ITagSet = {
   ),
   object: genTag(
     'The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image, as a nested browsing context, or as an external resource to be processed by a plugin.',
-    ['data', 'type', 'typemustmatch:v', 'name', 'usemap', 'form', 'width', 'height']
+    ['data', 'type', 'typemustmatch:v', 'name', 'useMap', 'form', 'width', 'height']
   ),
   param: genTag(
     'The param element defines parameters for plugins invoked by object elements. It does not represent anything on its own.',
@@ -299,11 +255,11 @@ export const HTML_TAGS: ITagSet = {
   ),
   video: genTag('A video element is used for playing videos or movies, and audio files with captions.', [
     'src',
-    'crossorigin:xo',
+    'crossOrigin:xo',
     'poster',
     'preload:pl',
-    'autoplay:v',
-    'mediagroup',
+    'autoPlay:v',
+    'mediaGroup',
     'loop:v',
     'muted:v',
     'controls:v',
@@ -312,10 +268,10 @@ export const HTML_TAGS: ITagSet = {
   ]),
   audio: genTag('An audio element represents a sound or audio stream.', [
     'src',
-    'crossorigin:xo',
+    'crossOrigin:xo',
     'preload:pl',
-    'autoplay:v',
-    'mediagroup',
+    'autoPlay:v',
+    'mediaGroup',
     'loop:v',
     'muted:v',
     'controls:v'
@@ -327,7 +283,7 @@ export const HTML_TAGS: ITagSet = {
   ),
   track: genTag(
     'The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.',
-    ['default:v', 'kind:tk', 'label', 'src', 'srclang']
+    ['default:v', 'kind:tk', 'label', 'src', 'srcLang']
   ),
   map: genTag(
     'The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.',
@@ -335,7 +291,7 @@ export const HTML_TAGS: ITagSet = {
   ),
   area: genTag(
     'The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.',
-    ['alt', 'coords', 'shape:sh', 'href', 'target', 'download', 'ping', 'rel', 'hreflang', 'type']
+    ['alt', 'coords', 'shape:sh', 'href', 'target', 'download', 'ping', 'rel', 'hrefLang', 'type']
   ),
   // Tabular data
   table: genTag('The table element represents data with more than one dimension, in the form of a table.', [
@@ -365,8 +321,8 @@ export const HTML_TAGS: ITagSet = {
   tr: genTag('The tr element represents a row of cells in a table.'),
   td: genTag('The td element represents a data cell in a table.', ['colspan', 'rowspan', 'headers']),
   th: genTag('The th element represents a header cell in a table.', [
-    'colspan',
-    'rowspan',
+    'colSpan',
+    'rowSpan',
     'headers',
     'scope:s',
     'sorted',
@@ -375,7 +331,7 @@ export const HTML_TAGS: ITagSet = {
   // Forms
   form: genTag(
     'The form element represents a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing.',
-    ['accept-charset', 'action', 'autocomplete:o', 'enctype:et', 'method:m', 'name', 'novalidate:v', 'target']
+    ['acceptCharset', 'action', 'autoComplete:o', 'enctype:et', 'method:m', 'name', 'noValidate:v', 'target']
   ),
   label: genTag(
     "The label element represents a caption in a user interface. The caption can be associated with a specific form control, known as the label element's labeled control, either using the for attribute, or by putting the form control inside the label element itself.",
@@ -386,29 +342,29 @@ export const HTML_TAGS: ITagSet = {
     [
       'accept',
       'alt',
-      'autocomplete:inputautocomplete',
-      'autofocus:v',
+      'autoComplete:inputautocomplete',
+      'autoFocus:v',
       'checked:v',
       'dirname',
       'disabled:v',
       'form',
-      'formaction',
-      'formenctype:et',
-      'formmethod:fm',
-      'formnovalidate:v',
-      'formtarget',
+      'formAction',
+      'formEnctype:et',
+      'formMethod:fm',
+      'formNoValidate:v',
+      'formTarget',
       'height',
-      'inputmode:im',
+      'inputMode:im',
       'list',
       'max',
-      'maxlength',
+      'maxLength',
       'min',
-      'minlength',
+      'minLength',
       'multiple:v',
       'name',
       'pattern',
       'placeholder',
-      'readonly:v',
+      'readOnly:v',
       'required:v',
       'size',
       'src',
@@ -419,21 +375,21 @@ export const HTML_TAGS: ITagSet = {
     ]
   ),
   button: genTag('The button element represents a button labeled by its contents.', [
-    'autofocus:v',
+    'autoFocus:v',
     'disabled:v',
     'form',
-    'formaction',
-    'formenctype:et',
-    'formmethod:fm',
-    'formnovalidate:v',
-    'formtarget',
+    'formAction',
+    'formEnctype:et',
+    'formMethod:fm',
+    'formNoValidate:v',
+    'formTarget',
     'name',
     'type:bt',
     'value'
   ]),
   select: genTag('The select element represents a control for selecting amongst a set of options.', [
-    'autocomplete:inputautocomplete',
-    'autofocus:v',
+    'autoComplete:inputautocomplete',
+    'autoFocus:v',
     'disabled:v',
     'form',
     'multiple:v',
@@ -455,18 +411,18 @@ export const HTML_TAGS: ITagSet = {
   textarea: genTag(
     "The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value.",
     [
-      'autocomplete:inputautocomplete',
-      'autofocus:v',
+      'autoComplete:inputautocomplete',
+      'autoFocus:v',
       'cols',
       'dirname',
       'disabled:v',
       'form',
-      'inputmode:im',
-      'maxlength',
-      'minlength',
+      'inputMode:im',
+      'maxLength',
+      'minLength',
       'name',
       'placeholder',
-      'readonly:v',
+      'readOnly:v',
       'required:v',
       'rows',
       'wrap:w'
@@ -512,7 +468,7 @@ export const HTML_TAGS: ITagSet = {
   // Scripting
   script: genTag(
     'The script element allows authors to include dynamic script and data blocks in their documents. The element does not represent content for the user.',
-    ['src', 'type', 'charset', 'async:v', 'defer:v', 'crossorigin:xo', 'nonce']
+    ['src', 'type', 'charset', 'async:v', 'defer:v', 'crossOrigin:xo', 'nonce']
   ),
   noscript: genTag(
     "The noscript element represents nothing if scripting is enabled, and represents its children if scripting is disabled. It is used to present different markup to user agents that support scripting and those that don't support scripting, by affecting how the document is parsed."
@@ -573,25 +529,25 @@ export function getHTML5TagProvider(): IHTMLTagProvider {
     'aria-valuemin',
     'aria-valuenow',
     'aria-valuetext',
-    'accesskey',
-    'contenteditable:b',
-    'contextmenu',
+    'accessKey',
+    'contentEditable:b',
+    'contextMenu',
     'children:jsx',
     'dir:d',
     'draggable:b',
     'dropzone',
     'hidden:v',
     'id',
-    'itemid',
+    'itemId',
     'itemprop',
-    'itemref',
-    'itemscope:v',
-    'itemtype',
+    'itemRef',
+    'itemScope:v',
+    'itemType',
     'lang',
     'role:roles',
-    'spellcheck:b',
+    'spellCheck:b',
     'style:jsx',
-    'tabindex',
+    'tabIndex',
     'title',
     'translate:y'
   ].map(genAttr);
