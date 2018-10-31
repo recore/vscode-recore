@@ -12,12 +12,12 @@ import { htmlFormat } from './services/htmlFormat';
 import { parseHTMLDocument } from './parser/htmlParser';
 // import { findDefinition } from './services/htmlDefinition';
 import { getTagProviderSettings } from './tagProviders';
-import { ScriptMode } from '../script/javascript';
 import { getEnabledTagProviders, getControllerTags } from './tagProviders';
 import { DocumentContext } from '../../types';
+import { getFileFsPath } from '../../utils/paths';
+import { findController } from '../template/parser/controllerParser';
 
 export function getVisionXMode(
-  scriptMode: ScriptMode
 ): LanguageMode {
   let tagProviderSettings = getTagProviderSettings();
   let enabledTagProviders = getEnabledTagProviders(tagProviderSettings);
@@ -34,7 +34,8 @@ export function getVisionXMode(
       config = c;
     },
     doComplete(document: TextDocument, position: Position) {
-      const controller = scriptMode.findController(document);
+      const fileFsPath = getFileFsPath(document.uri);
+      const controller = findController(fileFsPath);
       const tagProviders = enabledTagProviders.concat(getControllerTags(controller));
       return doComplete(document, position, visionxDocuments.get(document), tagProviders, config.emmet);
     },

@@ -17,7 +17,6 @@ import {
 
 import { getLanguageModelCache, LanguageModelCache } from './languageModelCache';
 import { getDocumentRegions, VisionXDocumentRegions } from './embeddedSupport';
-import { getJavascriptMode } from './script/javascript';
 import { getVisionXMode } from './template';
 import { DocumentContext } from '../types';
 
@@ -55,15 +54,14 @@ export interface LanguageModeRange extends Range {
   attributeValue?: boolean;
 }
 
-export function getLanguageModes(workspacePath: string | null | undefined): LanguageModes {
+export function getLanguageModes(): LanguageModes {
   const documentRegions = getLanguageModelCache<VisionXDocumentRegions>(10, 60, document => getDocumentRegions(document));
 
   let modelCaches: LanguageModelCache<any>[] = [];
   modelCaches.push(documentRegions);
 
-  const jsMode = getJavascriptMode(documentRegions, workspacePath);
   let modes: { [k: string]: LanguageMode } = {
-    visionx: getVisionXMode(jsMode),
+    visionx: getVisionXMode(),
   };
 
   return {

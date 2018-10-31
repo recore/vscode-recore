@@ -36,7 +36,7 @@ export class RLS {
   private languageModes: LanguageModes;
 
   constructor(private workspacePath: string, private lspConnection: IConnection) {
-    this.languageModes = getLanguageModes(workspacePath);
+    this.languageModes = getLanguageModes();
 
     this.documentService = new DocumentService();
     this.documentService.listen(lspConnection);
