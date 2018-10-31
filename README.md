@@ -1,4 +1,4 @@
-# Recore Tool for VSCode
+# Recore support for VSCode
 
 ![](https://img.alicdn.com/tfs/TB1XKU_EVOWBuNjy0FiXXXFxVXa-1396-746.png)
 
@@ -23,3 +23,11 @@
 3. Open `.vx` file and activate the extension
 
 **Enjoy!**
+
+## Appreciation
+
+VSCode-Recore is inpired by [Vetur](https://github.com/vuejs/vetur) and [auto-close-tag](https://github.com/formulahendry/vscode-auto-close-tag).
+
+## Lisence
+
+[MIT](https://opensource.org/licenses/MIT)
