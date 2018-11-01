@@ -117,7 +117,7 @@ function parseClass(declaration: any): IController | null {
   const components: string[] = [];
   const helpers: string[] = [];
   const properties: string[] = [];
-  const methods: string[] = [];
+  let methods: string[] = [];
 
   // 解析类
   if (classBody.length) {
@@ -146,7 +146,7 @@ function parseClass(declaration: any): IController | null {
         }
       } else {
         const method = _.get(item, ['key', 'name'], '');
-        if (!!method && isPublic(method)) {
+        if (!!method && isPublic(method) && method[0] !== '$') {
           methods.push(method);
         }
       }
