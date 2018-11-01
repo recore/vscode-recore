@@ -21,5 +21,4 @@ declare module 'eslint' {
   }
 }
 
-declare module 'parse-gitignore';
 declare module '*.json';

@@ -20,7 +20,6 @@ import {
   DocumentLinkParams,
   DocumentFormattingParams,
   DidChangeConfigurationParams,
-  FileChangeType
 } from 'vscode-languageserver';
 import Uri from 'vscode-uri';
 import * as path from 'path';
@@ -33,17 +32,16 @@ import { DocumentContext } from '../types';
 export class RLS {
   private documentService: DocumentService;
 
-  private languageModes: LanguageModes;
+  private language: LanguageModes;
 
   constructor(private workspacePath: string, private lspConnection: IConnection) {
-    this.languageModes = getLanguageModes();
+    this.language = getLanguageModes();
 
     this.documentService = new DocumentService();
     this.documentService.listen(lspConnection);
 
     this.setupConfigListeners();
     this.setupLanguageFeatures();
-    this.setupFileChangeListeners();
 
     this.lspConnection.onShutdown(() => {
       this.dispose();
@@ -70,23 +68,8 @@ export class RLS {
     this.lspConnection.onSignatureHelp(this.onSignatureHelp.bind(this));
   }
 
-  private setupFileChangeListeners() {
-    this.documentService.onDidClose(e => {
-      this.removeDocument(e.document);
-    });
-    this.lspConnection.onDidChangeWatchedFiles(({ changes }) => {
-      const jsMode = this.languageModes.getMode('javascript');
-      changes.forEach(c => {
-        if (c.type === FileChangeType.Changed) {
-          const fsPath = Uri.parse(c.uri).fsPath;
-          jsMode.onDocumentChanged!(fsPath);
-        }
-      });
-    });
-  }
-
   configure(config: any): void {
-    this.languageModes.getAllModes().forEach(m => {
+    this.language.getAllModes().forEach(m => {
       if (m.configure) {
         m.configure(config);
       }
@@ -97,7 +80,7 @@ export class RLS {
     const doc = this.documentService.getDocument(textDocument.uri);
     const fullDocRange = Range.create(Position.create(0, 0), doc.positionAt(doc.getText().length));
 
-    const modeRanges = this.languageModes.getModesInRange(doc, fullDocRange);
+    const modeRanges = this.language.getModesInRange(doc, fullDocRange);
     const allEdits: TextEdit[] = [];
 
     modeRanges.forEach(range => {
@@ -114,7 +97,7 @@ export class RLS {
 
   onCompletion({ textDocument, position }: TextDocumentPositionParams): CompletionList {
     const doc = this.documentService.getDocument(textDocument.uri);
-    const mode = this.languageModes.getModeAtPosition(doc, position);
+    const mode = this.language.getModeAtPosition(doc, position);
     if (mode && mode.doComplete) {
       return mode.doComplete(doc, position);
     }
@@ -127,7 +110,7 @@ export class RLS {
       const { uri, languageId } = item.data;
       if (uri && languageId) {
         const doc = this.documentService.getDocument(uri);
-        const mode = this.languageModes.getMode(languageId);
+        const mode = this.language.getMode(languageId);
         if (doc && mode && mode.doResolve) {
           return mode.doResolve(doc, item);
         }
@@ -139,7 +122,7 @@ export class RLS {
 
   onHover({ textDocument, position }: TextDocumentPositionParams): Hover {
     const doc = this.documentService.getDocument(textDocument.uri);
-    const mode = this.languageModes.getModeAtPosition(doc, position);
+    const mode = this.language.getModeAtPosition(doc, position);
     if (mode && mode.doHover) {
       return mode.doHover(doc, position);
     }
@@ -148,7 +131,7 @@ export class RLS {
 
   onDocumentHighlight({ textDocument, position }: TextDocumentPositionParams): DocumentHighlight[] {
     const doc = this.documentService.getDocument(textDocument.uri);
-    const mode = this.languageModes.getModeAtPosition(doc, position);
+    const mode = this.language.getModeAtPosition(doc, position);
     if (mode && mode.findDocumentHighlight) {
       return mode.findDocumentHighlight(doc, position);
     }
@@ -157,7 +140,7 @@ export class RLS {
 
   onDefinition({ textDocument, position }: TextDocumentPositionParams): Definition {
     const doc = this.documentService.getDocument(textDocument.uri);
-    const mode = this.languageModes.getModeAtPosition(doc, position);
+    const mode = this.language.getModeAtPosition(doc, position);
     if (mode && mode.findDefinition) {
       // return mode.findDefinition(doc, position);
     }
@@ -166,7 +149,7 @@ export class RLS {
 
   onReferences({ textDocument, position }: TextDocumentPositionParams): Location[] {
     const doc = this.documentService.getDocument(textDocument.uri);
-    const mode = this.languageModes.getModeAtPosition(doc, position);
+    const mode = this.language.getModeAtPosition(doc, position);
     if (mode && mode.findReferences) {
       return mode.findReferences(doc, position);
     }
@@ -190,7 +173,7 @@ export class RLS {
     };
 
     const links: DocumentLink[] = [];
-    this.languageModes.getAllModesInDocument(doc).forEach(m => {
+    this.language.getAllModesInDocument(doc).forEach(m => {
       if (m.findDocumentLinks) {
         pushAll(links, m.findDocumentLinks(doc, documentContext));
       }
@@ -202,7 +185,7 @@ export class RLS {
     const doc = this.documentService.getDocument(textDocument.uri);
     const symbols: SymbolInformation[] = [];
 
-    this.languageModes.getAllModesInDocument(doc).forEach(m => {
+    this.language.getAllModesInDocument(doc).forEach(m => {
       if (m.findDocumentSymbols) {
         pushAll(symbols, m.findDocumentSymbols(doc));
       }
@@ -212,7 +195,7 @@ export class RLS {
 
   onSignatureHelp({ textDocument, position }: TextDocumentPositionParams): SignatureHelp {
     const doc = this.documentService.getDocument(textDocument.uri);
-    const mode = this.languageModes.getModeAtPosition(doc, position);
+    const mode = this.language.getModeAtPosition(doc, position);
     if (mode && mode.doSignatureHelp) {
       return mode.doSignatureHelp(doc, position);
     }
@@ -220,11 +203,11 @@ export class RLS {
   }
 
   removeDocument(doc: TextDocument): void {
-    this.languageModes.onDocumentRemoved(doc);
+    this.language.onDocumentRemoved(doc);
   }
 
   dispose(): void {
-    this.languageModes.dispose();
+    this.language.dispose();
   }
 }
 
