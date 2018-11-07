@@ -50,7 +50,7 @@
       {
         "id": "recore-icons",
         "label": "Recore Icons",
-        "path": "./recore-icons.json"
+        "path": "./iconThemes/recore-icons.json"
       }
     ],
     "configuration": {
