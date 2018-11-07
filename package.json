@@ -37,7 +37,7 @@
           ".vx",
           ".vsx"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./languages/visionx.json"
       }
     ],
     "grammars": [
@@ -102,19 +102,6 @@
           "description": "Whether to close self-closing tag automatically",
           "scope": "resource"
         },
-        "recore.completion.autoImport": {
-          "type": "boolean",
-          "default": true,
-          "description": "Include completion for module export and auto import them"
-        },
-        "recore.grammar.customBlocks": {
-          "type": "object",
-          "default": {
-            "docs": "md",
-            "i18n": "json"
-          },
-          "description": "Mapping from custom block tag name to language name. Used for generating grammar to support syntax highlighting for custom blocks."
-        },
         "recore.format.defaultFormatter.html": {
           "type": "string",
           "default": "js-beautify-html",
@@ -128,117 +115,12 @@
           ],
           "description": "Default formatter for <template> region"
         },
-        "recore.format.defaultFormatter.css": {
-          "type": "string",
-          "default": "prettier",
-          "enum": [
-            "none",
-            "prettier"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "css formatter using css parser from prettier"
-          ],
-          "description": "Default formatter for <style> region"
-        },
-        "recore.format.defaultFormatter.postcss": {
-          "type": "string",
-          "default": "prettier",
-          "enum": [
-            "none",
-            "prettier"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "postcss formatter using css parser from prettier"
-          ],
-          "description": "Default formatter for <style lang='postcss'> region"
-        },
-        "recore.format.defaultFormatter.scss": {
-          "type": "string",
-          "default": "prettier",
-          "enum": [
-            "none",
-            "prettier"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "scss formatter using scss parser from prettier"
-          ],
-          "description": "Default formatter for <style lang='scss'> region"
-        },
-        "recore.format.defaultFormatter.less": {
-          "type": "string",
-          "default": "prettier",
-          "enum": [
-            "none",
-            "prettier"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "less formatter using postcss parser from prettier"
-          ],
-          "description": "Default formatter for <style lang='less'> region"
-        },
-        "recore.format.defaultFormatter.stylus": {
-          "type": "string",
-          "default": "stylus-supremacy",
-          "enum": [
-            "none",
-            "stylus-supremacy"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "stylus formatter from stylus-supremacy"
-          ],
-          "description": "Default formatter for <style lang='stylus'> region"
-        },
-        "recore.format.defaultFormatter.js": {
-          "type": "string",
-          "default": "prettier",
-          "enum": [
-            "none",
-            "prettier",
-            "vscode-typescript"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "js formatter from prettier",
-            "js formatter from TypeScript"
-          ],
-          "description": "Default formatter for <script> region"
-        },
-        "recore.format.defaultFormatter.ts": {
-          "type": "string",
-          "default": "prettier",
-          "enum": [
-            "none",
-            "prettier",
-            "vscode-typescript"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "ts formatter using typescript parser from prettier",
-            "ts formatter from TypeScript"
-          ],
-          "description": "Default formatter for <script> region"
-        },
         "recore.format.defaultFormatterOptions": {
           "type": "object",
           "default": {
             "js-beautify-html": {}
           },
           "description": "Options for all default formatters"
-        },
-        "recore.format.styleInitialIndent": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether to have initial indent for <style> region"
-        },
-        "recore.format.scriptInitialIndent": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether to have initial indent for <script> region"
         }
       }
     },

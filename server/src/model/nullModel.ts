@@ -1,4 +1,4 @@
-import { LanguageMode } from './languageModes';
+import { LanguageModel } from './index';
 
 export const NULL_HOVER: any = {
   contents: []
@@ -15,12 +15,9 @@ export const NULL_COMPLETION: any = {
   items: []
 };
 
-export const nullMode: LanguageMode = {
+export const nullMode: LanguageModel = {
   getId: () => '',
   onDocumentRemoved() {},
   dispose() {},
-  doHover: () => NULL_HOVER,
-  doComplete: () => NULL_COMPLETION,
-  doSignatureHelp: () => NULL_SIGNATURE,
-  findReferences: () => []
+  doComplete: () => NULL_COMPLETION
 };
