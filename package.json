@@ -133,7 +133,7 @@
     "commands": [
       {
         "command": "recore.createPageOrComp",
-        "title": "创建页面/组件"
+        "title": "创建Recore页面/组件"
       }
     ],
     "menus": {
