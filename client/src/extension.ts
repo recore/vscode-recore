@@ -1,9 +1,8 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import { workspace, ExtensionContext } from 'vscode';
 import { TagManager } from './autoTag/tagManager';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import {
 	LanguageClient,
 	LanguageClientOptions,
@@ -11,6 +10,7 @@ import {
 	TransportKind,
 	RevealOutputChannelOn
 } from 'vscode-languageclient';
+import generateTemplate from './templateGenerator';
 
 let client: LanguageClient;
 
@@ -50,14 +50,14 @@ export function activate(context: ExtensionContext) {
 			options: debugOptions
 		}
   };
-	
+
   // Options to control the language client
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
 		documentSelector: ['visionx'],
 		synchronize: {
+			configurationSection: ['recore', 'emmet'],
 			// Notify the server about file changes to '.clientrc files contained in the workspace
-			configurationSection: ['recore', 'emmet', 'html', 'javascript', 'typescript', 'prettier'],
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		},
 		initializationOptions: {
@@ -75,8 +75,9 @@ export function activate(context: ExtensionContext) {
 	);
 
 	// Start the client. This will also launch the server
-	const disposable = client.start();
-  context.subscriptions.push(disposable);
+	const disposerRlC = client.start();
+	const disposerCreate = vscode.commands.registerCommand('recore.createPageOrComp', generateTemplate());
+  context.subscriptions.push(disposerRlC, disposerCreate);
 }
 
 export function deactivate(): Thenable<void> {
