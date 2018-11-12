@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-import { createWriteStream, ensureDir } from "fs-extra";
-import createUUID from './uuid';
-import { homedir, tmpdir } from "os";
-import { join } from "path";
-import Log from './log';
-import * as pino from "pino";
+// import { createWriteStream, ensureDir } from "fs-extra";
+// import createUUID from './uuid';
+// import { homedir, tmpdir } from "os";
+// import { join } from "path";
+// import Log from './log';
+// import * as pino from "pino";
 // import { AliGoldDirection } from "./AliGoldDirection";
 
 export default async function emitSurvey() {
@@ -20,26 +20,26 @@ export default async function emitSurvey() {
   const DISLIKE_FEEDBACK = '非常期望听到您的宝贵意见和建议';
   const NEW_ISSUE_YES = '提issue';
   const NEW_ISSUE_NO = '残忍拒绝';
-  const RECORE_HOME_PATH = join(homedir(), ".nowa/recore");
-  const LOG_DIR_PATH = join(tmpdir(), "recore");
+  // const RECORE_HOME_PATH = join(homedir(), ".nowa/recore");
+  // const LOG_DIR_PATH = join(tmpdir(), "recore");
   const date = new Date();
   // 每个周期开始的第一天推送
   if (date.getDate() % PERIOD !== 1) {
     // return;
   }
 
-  await Promise.all([ensureDir(RECORE_HOME_PATH), ensureDir(LOG_DIR_PATH)]);
-  const logger: RecoreReporter.ILog = pino(
-    {
-      name: "recore-reporter"
-    },
-    createWriteStream(join(LOG_DIR_PATH, "reporter.log"), { flags: "a+" })
-  );
-  const log = new Log(
-    join(RECORE_HOME_PATH, "operations.log"),
-    { logger }
-  );
-  const uuid = createUUID();
+  // await Promise.all([ensureDir(RECORE_HOME_PATH), ensureDir(LOG_DIR_PATH)]);
+  // const logger: RecoreReporter.ILog = pino(
+  //   {
+  //     name: "recore-reporter"
+  //   },
+  //   createWriteStream(join(LOG_DIR_PATH, "reporter.log"), { flags: "a+" })
+  // );
+  // const log = new Log(
+  //   join(RECORE_HOME_PATH, "operations.log"),
+  //   { logger }
+  // );
+  // const uuid = createUUID();
 
   const genRateBox = vscode.window.showInformationMessage(
     FEEDBACK_TITLE,
