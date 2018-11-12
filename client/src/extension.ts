@@ -11,6 +11,7 @@ import {
 	RevealOutputChannelOn
 } from 'vscode-languageclient';
 import generateTemplate from './templateGenerator';
+import emitSurvey from './survey/index';
 
 let client: LanguageClient;
 
@@ -77,7 +78,8 @@ export function activate(context: ExtensionContext) {
 	// Start the client. This will also launch the server
 	const disposerRlC = client.start();
 	const disposerCreate = vscode.commands.registerCommand('recore.createPageOrComp', generateTemplate());
-  context.subscriptions.push(disposerRlC, disposerCreate);
+	const disposerSurvey = vscode.commands.registerCommand('recore.survey', emitSurvey);
+  context.subscriptions.push(disposerRlC, disposerCreate, disposerSurvey);
 }
 
 export function deactivate(): Thenable<void> {

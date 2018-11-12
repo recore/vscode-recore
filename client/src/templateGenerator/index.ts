@@ -8,7 +8,7 @@ async function populateTemplate(srcName: string, targetName: string, pathToStore
     const outDirPath = dirname(__dirname);
     const srcDirPath = dirname(outDirPath);
     const ext = extname(srcName);
-    const content = await readFile(`${srcDirPath}/src/template/${srcName.replace(/\.ts/, '.js')}`);
+    const content = await readFile(`${srcDirPath}/template/${srcName.replace(/\.ts/, '.js')}`);
     // file content
     let folderName = targetName;
     if (ext === '.ts') {

@@ -12,7 +12,8 @@
   ],
   "activationEvents": [
     "onLanguage:visionx",
-    "onCommand:recore.createPageOrComp"
+    "onCommand:recore.createPageOrComp",
+    "onCommand:recore.survey"
   ],
   "repository": {
     "type": "git",
@@ -134,6 +135,10 @@
       {
         "command": "recore.createPageOrComp",
         "title": "创建Recore页面/组件"
+      },
+      {
+        "command": "recore.survey",
+        "title": "Recore用户调查"
       }
     ],
     "menus": {
