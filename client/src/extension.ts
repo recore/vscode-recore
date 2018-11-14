@@ -78,6 +78,8 @@ export function activate(context: ExtensionContext) {
 	// Start the client. This will also launch the server
 	const disposerRlC = client.start();
 	const disposerCreate = vscode.commands.registerCommand('recore.createPageOrComp', generateTemplate());
+	// TODO:每次启动是验证是否发起问卷
+	// emitSurvey();
 	const disposerSurvey = vscode.commands.registerCommand('recore.survey', emitSurvey);
   context.subscriptions.push(disposerRlC, disposerCreate, disposerSurvey);
 }

@@ -1,51 +1,29 @@
 import * as vscode from 'vscode';
-// import { createWriteStream, ensureDir } from "fs-extra";
-// import createUUID from './uuid';
-// import { homedir, tmpdir } from "os";
-// import { join } from "path";
-// import Log from './log';
-// import * as pino from "pino";
-// import { AliGoldDirection } from "./AliGoldDirection";
 
 export default async function emitSurvey() {
   const PERIOD = 14; // 间隔的周期
   const ISSUE_URL = 'http://gitlab.alibaba-inc.com/groups/recore/issues';
   const FEEDBACK_TITLE = '帮助我们改善 Recore！请问您如何评价 Recore？';
   const Command: any = {
-    like: '赞',
-    dislike: '踩',
-    delay: '以后提醒',
+    Like: '赞',
+    Dislike: '踩',
+    Delay: '以后提醒',
   };
   const LIKE_FEEDBACK = '谢谢鼓励';
   const DISLIKE_FEEDBACK = '非常期望听到您的宝贵意见和建议';
   const NEW_ISSUE_YES = '提issue';
   const NEW_ISSUE_NO = '残忍拒绝';
-  // const RECORE_HOME_PATH = join(homedir(), ".nowa/recore");
-  // const LOG_DIR_PATH = join(tmpdir(), "recore");
   const date = new Date();
   // 每个周期开始的第一天推送
   if (date.getDate() % PERIOD !== 1) {
     // return;
   }
 
-  // await Promise.all([ensureDir(RECORE_HOME_PATH), ensureDir(LOG_DIR_PATH)]);
-  // const logger: RecoreReporter.ILog = pino(
-  //   {
-  //     name: "recore-reporter"
-  //   },
-  //   createWriteStream(join(LOG_DIR_PATH, "reporter.log"), { flags: "a+" })
-  // );
-  // const log = new Log(
-  //   join(RECORE_HOME_PATH, "operations.log"),
-  //   { logger }
-  // );
-  // const uuid = createUUID();
-
   const genRateBox = vscode.window.showInformationMessage(
     FEEDBACK_TITLE,
-    Command.like,
-    Command.dislike,
-    Command.delay
+    Command.Like,
+    Command.Dislike,
+    Command.Delay
   );
   const getCommand = genRateBox.then((btn: string | undefined) => {
     if (!btn) {
