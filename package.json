@@ -18,6 +18,7 @@
     "test": "sh ./scripts/e2e.sh",
     "pkg": "vsce package"
   },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "^3.0.3",
     "tslint": "^5.8.0",
