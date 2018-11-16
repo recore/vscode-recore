@@ -1,9 +1,8 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import { workspace, ExtensionContext } from 'vscode';
 import { TagManager } from './autoTag/tagManager';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import {
 	LanguageClient,
 	LanguageClientOptions,
@@ -11,28 +10,32 @@ import {
 	TransportKind,
 	RevealOutputChannelOn
 } from 'vscode-languageclient';
+import generateTemplate from './templateGenerator';
+import emitSurvey from './survey';
+import surveyPolicy from './survey/policy';
+
 
 let client: LanguageClient;
 
 export function activate(context: ExtensionContext) {
 
-  const config = workspace.getConfiguration();
+	const config = workspace.getConfiguration();
 
-  // add associations
-  config.update('files.associations', {
-    "*.vx": "visionx",
-    "*.vsx": "visionx"
-  }, true);
+	// add associations
+	config.update('files.associations', {
+		"*.vx": "visionx",
+		"*.vsx": "visionx"
+	}, true);
 	config.update('workbench.iconTheme', 'recore-icons', true);
 
-  // 标签自动闭合、重命名
-  const tagManager = new TagManager();
-  tagManager.run();
+	// 标签自动闭合、重命名
+	const tagManager = new TagManager();
+	tagManager.run();
 
-  /**
-   * 初始化语言服务器
-   */
-  // The server is implemented in node
+	/**
+	 * 初始化语言服务器
+	 */
+	// The server is implemented in node
 	let serverModule = context.asAbsolutePath(
 		path.join('server', 'out', 'server.js')
 	);
@@ -49,24 +52,24 @@ export function activate(context: ExtensionContext) {
 			transport: TransportKind.ipc,
 			options: debugOptions
 		}
-  };
-	
-  // Options to control the language client
+	};
+
+	// Options to control the language client
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
 		documentSelector: ['visionx'],
 		synchronize: {
+			configurationSection: ['recore', 'emmet'],
 			// Notify the server about file changes to '.clientrc files contained in the workspace
-			configurationSection: ['recore', 'emmet', 'html', 'javascript', 'typescript', 'prettier'],
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		},
 		initializationOptions: {
-      config
+			config
 		},
 		revealOutputChannelOn: RevealOutputChannelOn.Never
-  };
-  
-  	// Create the language client and start the client.
+	};
+
+	// Create the language client and start the client.
 	client = new LanguageClient(
 		'recore',
 		'Recore Language Server',
@@ -75,8 +78,13 @@ export function activate(context: ExtensionContext) {
 	);
 
 	// Start the client. This will also launch the server
-	const disposable = client.start();
-  context.subscriptions.push(disposable);
+	const disposerRlC = client.start();
+	const disposerCreate = vscode.commands.registerCommand('recore.createPageOrComp', generateTemplate());
+	// 发起问卷
+	surveyPolicy(emitSurvey);
+	// 绑定访问调查快捷键
+	const disposerSurvey = vscode.commands.registerCommand('recore.survey', emitSurvey);
+	context.subscriptions.push(disposerRlC, disposerCreate, disposerSurvey);
 }
 
 export function deactivate(): Thenable<void> {

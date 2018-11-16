@@ -4,6 +4,7 @@
   "version": "0.1.11",
   "author": "wuyue",
   "license": "MIT",
+  "scripts": {},
   "engines": {
     "node": "*"
   },
@@ -24,6 +25,5 @@
   "devDependencies": {
     "@types/js-beautify": "0.0.31",
     "@types/lodash": "^4.14.91"
-  },
-  "scripts": {}
+  }
 }

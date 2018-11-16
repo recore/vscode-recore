@@ -1,24 +1,27 @@
 {
-	"name": "recore-language-client",
-	"description": "VSCode part of a language server",
-	"author": "wuyue",
-	"license": "MIT",
-	"version": "0.1.11",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/recore/vscode-recore.git"
-	},
-	"engines": {
-		"vscode": "^1.25.0"
-	},
-	"scripts": {
-		"update-vscode": "node ./node_modules/vscode/bin/install",
-		"postinstall": "node ./node_modules/vscode/bin/install"
-	},
-	"dependencies": {
-		"vscode-languageclient": "^4.1.4"
-	},
-	"devDependencies": {
-		"vscode": "^1.1.18"
-	}
+  "name": "recore-language-client",
+  "description": "VSCode part of a language server",
+  "version": "0.1.11",
+  "author": "wuyue",
+  "license": "MIT",
+  "scripts": {
+    "update-vscode": "node ./node_modules/vscode/bin/install",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/recore/vscode-recore.git"
+  },
+  "engines": {
+    "vscode": "^1.20.0"
+  },
+  "dependencies": {
+    "@ali/recore-reporter": "^1.4.0",
+    "dayjs": "^1.7.7",
+    "vscode-languageclient": "^4.1.4",
+    "vscode-uri": "^1.0.1"
+  },
+  "devDependencies": {
+    "vscode": "^1.1.18"
+  }
 }

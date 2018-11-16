@@ -1,5 +1,11 @@
 # Change Log
 
+### 0.1.11 | 2018-11-12
+
+- Add feature of generating template of page or component
+- Fix bug of html attributions [#issue1](https://github.com/recore/recore/issues/1)
+- Optimize size of package
+
 ### 0.1.10 | 2018-10-25
 
 - Fix bug of controller in typescript
