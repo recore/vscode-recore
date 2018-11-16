@@ -16,13 +16,10 @@
     "vscode": "^1.20.0"
   },
   "dependencies": {
+    "@ali/recore-reporter": "^1.4.0",
+    "dayjs": "^1.7.7",
     "vscode-languageclient": "^4.1.4",
-    "vscode-uri": "^1.0.1",
-    "agentkeepalive": "^4.0.0",
-    "axios": "^0.18.0",
-    "getmac": "^1.4.6",
-    "pino": "^5.8.1",
-    "fs-extra": "^7.0.1"
+    "vscode-uri": "^1.0.1"
   },
   "devDependencies": {
     "vscode": "^1.1.18"

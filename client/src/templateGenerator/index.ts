@@ -24,20 +24,22 @@ async function populateTemplate(srcName: string, targetName: string, pathToStore
 
 export default function generateTemplate() {
   return async (file: Uri) => {
-    const dir = file.fsPath;
-    // Display a message box to the user
-    const targetName = await showInputBox();
-    if (targetName) {
-      exec(`cd ${dir} && mkdir ${targetName} && cd ${targetName}`, (error) => {
-        ['__Name__.vx', '__Name__.ts', '__Name__.less'].forEach((srcName) => {
-          populateTemplate(srcName, targetName, `${dir}/${targetName}`);
+    if (file) {
+      const dir = file.fsPath;
+      // Display a message box to the user
+      const targetName = await showInputBox();
+      if (targetName) {
+        exec(`cd ${dir} && mkdir ${targetName} && cd ${targetName}`, (error) => {
+          ['__Name__.vx', '__Name__.ts', '__Name__.less'].forEach((srcName) => {
+            populateTemplate(srcName, targetName, `${dir}/${targetName}`);
+          });
+          if (error) {
+            showMessage(error, 'error');
+          } else {
+            showMessage(`${targetName} has been generated.`);
+          }
         });
-        if (error) {
-          showMessage(error, 'error');
-        } else {
-          showMessage(`${targetName} has been generated.`);
-        }
-      });
+      }
     }
   };
 }

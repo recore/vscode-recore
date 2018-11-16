@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import Reporter from '@ali/recore-reporter';
+
 
 export default function emitSurvey() {
   const PERIOD = 14; // 间隔的周期
@@ -13,6 +15,8 @@ export default function emitSurvey() {
   const DISLIKE_FEEDBACK = '非常期望听到您的宝贵意见和建议';
   const NEW_ISSUE_YES = '提issue';
   const NEW_ISSUE_NO = '残忍拒绝';
+
+  const reporter = new Reporter('survey');
 
   // TODO:检验是否发起问卷
   // 校验一：是否已经发起过
@@ -46,30 +50,19 @@ export default function emitSurvey() {
       vscode.window.showInformationMessage(LIKE_FEEDBACK);
     } else if (btn === Command.Dislike) {
       vscode.window.showInformationMessage(DISLIKE_FEEDBACK, NEW_ISSUE_YES, NEW_ISSUE_NO)
-      .then(res => {
-        if (res === NEW_ISSUE_YES) {
-          vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(ISSUE_URL));
-        }
-      });
+        .then(res => {
+          if (res === NEW_ISSUE_YES) {
+            vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(ISSUE_URL));
+          }
+        });
     }
     return btn;
   });
   getCommand.then(cmdName => {
-    if (!cmdName) {
-      return null;
-    }
-    try {
-      // cmdName：一类：赞、踩（问卷完成）一类：以后提醒（未完成）
-      // if (cmdName === 赞 或 踩) {
-      //   写入命令日志,
-      //   标志为完成，
-      //   并发送命令
-      // } else {
-      //   标志为未完成
-      // }
-    } catch (e) {
-      console.log(e);
-      // 发生错误，写入错误日志，标志为错误，错误一般为未联网
+    if (cmdName === Command.Like) {
+      reporter.report('like', 'vscode-survey');
+    } else if (cmdName === Command.Dislike) {
+      reporter.report('dislike', 'vscode-survey');
     }
   });
 }
