@@ -24,7 +24,11 @@ dayjs.locale('zh-cn');
 const timestampFile = join(homedir(), '.nowa/recore/survey-timestamp.txt');
 
 function writeTimestamp(): void {
-    writeFile(timestampFile, Date.now());
+    writeFile(timestampFile, Date.now(), (err) => {
+        if (err) {
+            console.error(err);
+        }
+    });
 }
 
 function readTimestamp(): Promise<number | null> {

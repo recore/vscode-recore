@@ -16,7 +16,9 @@ export default function emitSurvey() {
   const NEW_ISSUE_YES = '提issue';
   const NEW_ISSUE_NO = '残忍拒绝';
 
-  const reporter = new Reporter('survey');
+  // 初始化 reporter
+  const workspaceFolder = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0];
+  const reporter = new Reporter('survey', workspaceFolder ? workspaceFolder.uri.path : null);
 
   // TODO:检验是否发起问卷
   // 校验一：是否已经发起过
