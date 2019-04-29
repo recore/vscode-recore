@@ -1,7 +1,7 @@
 {
   "name": "recore-language-client",
   "description": "VSCode part of a language server",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "author": "wuyue",
   "license": "MIT",
   "scripts": {

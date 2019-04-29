@@ -1,7 +1,7 @@
 {
   "name": "recore-language-server",
   "description": "recore-language-server",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "author": "wuyue",
   "license": "MIT",
   "scripts": {},
@@ -20,10 +20,11 @@
     "@babel/core": "^7.1.2",
     "@babel/parser": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.5"
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "@ali/prettier-plugin-visionx": "^0.0.1"
   },
   "devDependencies": {
-    "@types/js-beautify": "0.0.31",
+    "@types/prettier": "^1.16.3",
     "@types/lodash": "^4.14.91"
   }
 }

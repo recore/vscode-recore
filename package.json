@@ -1,7 +1,7 @@
 {
   "name": "recore",
   "description": "Recore support for Visual Studio Code",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "license": "MIT",
   "displayName": "Recore",
   "publisher": "alixux",
@@ -18,11 +18,13 @@
     "test": "sh ./scripts/e2e.sh",
     "pkg": "vsce package"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@ali/prettier-plugin-visionx": "^0.0.1"
+  },
   "devDependencies": {
     "@types/node": "^7.0.43",
-    "typescript": "^3.0.3",
     "tslint": "^5.8.0",
+    "typescript": "^3.0.3",
     "vsce": "^1.53.0"
   },
   "engines": {
