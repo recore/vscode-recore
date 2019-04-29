@@ -18,9 +18,7 @@
     "test": "sh ./scripts/e2e.sh",
     "pkg": "vsce package"
   },
-  "dependencies": {
-    "@ali/prettier-plugin-visionx": "^0.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.43",
     "tslint": "^5.8.0",
@@ -124,26 +122,6 @@
           "default": true,
           "description": "Whether to close self-closing tag automatically",
           "scope": "resource"
-        },
-        "recore.format.defaultFormatter.html": {
-          "type": "string",
-          "default": "js-beautify-html",
-          "enum": [
-            "none",
-            "js-beautify-html"
-          ],
-          "enumDescriptions": [
-            "disable formatting",
-            "html formatter of js-beautify"
-          ],
-          "description": "Default formatter for <template> region"
-        },
-        "recore.format.defaultFormatterOptions": {
-          "type": "object",
-          "default": {
-            "js-beautify-html": {}
-          },
-          "description": "Options for all default formatters"
         }
       }
     },
