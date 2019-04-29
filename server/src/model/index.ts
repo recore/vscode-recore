@@ -2,7 +2,8 @@ import * as _ from 'lodash';
 import { getLanguageModelCache } from './languageModelCache';
 import { HTMLDocument } from './parser/htmlParser';
 import { doComplete } from './services/htmlCompletion';
-import { htmlFormat } from './services/htmlFormat';
+// import { htmlFormat } from './services/htmlFormat';
+import { visionxFormat } from './services/visionxFormat';
 import { parseHTMLDocument } from './parser/htmlParser';
 import { getTagProviderSettings } from './tagProviders';
 import { getEnabledTagProviders, getControllerTags } from './tagProviders';
@@ -52,8 +53,8 @@ export function getVisionXModel(
       const tagProviders = enabledTagProviders.concat(getControllerTags(controller));
       return doComplete(document, position, visionxDocuments.get(document), tagProviders, config.emmet);
     },
-    format(document: TextDocument, range: Range, formattingOptions: FormattingOptions) {
-      return htmlFormat(document, range, formattingOptions, config);
+    format(document: TextDocument, range: Range) {
+      return visionxFormat(document, range);
     },
     onDocumentRemoved(document: TextDocument) {
       visionxDocuments.onDocumentRemoved(document);

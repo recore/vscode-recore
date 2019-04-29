@@ -38,7 +38,7 @@ connection.onInitialize((params: InitializeParams): InitializeResult => {
   const capabilities = {
     textDocumentSync: (TextDocumentSyncKind.Full as any),
     completionProvider: { resolveProvider: true, triggerCharacters: ['.', '"', '{', '<', "'", '/', '@'] },
-    documentFormattingProvider: true,
+    documentFormattingProvider: true, 
   };
 
   return { capabilities: (capabilities as any) };
