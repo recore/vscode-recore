@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.1.12 | 2019-04-30
+
+- Fix bug of vx format [#issue #58093](http://gitlab.alibaba-inc.com/recore/recore/issues/58093)
+
 ### 0.1.11 | 2018-11-12
 
 - Add feature of generating template of page or component
