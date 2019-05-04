@@ -16,7 +16,7 @@
     "compile": "npm run compile:client && npm run compile:server",
     "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
     "test": "sh ./scripts/e2e.sh",
-    "pkg": "vsce package"
+    "pkg": "vsce package --yarn"
   },
   "dependencies": {},
   "devDependencies": {
