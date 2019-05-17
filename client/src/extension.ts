@@ -11,8 +11,8 @@ import {
 	RevealOutputChannelOn
 } from 'vscode-languageclient';
 import generateTemplate from './templateGenerator';
-import emitSurvey from './survey';
-import surveyPolicy from './survey/policy';
+// import emitSurvey from './survey';
+// import surveyPolicy from './survey/policy';
 
 
 let client: LanguageClient;
@@ -76,10 +76,10 @@ export function activate(context: ExtensionContext) {
 	const disposerRlC = client.start();
 	const disposerCreate = vscode.commands.registerCommand('recore.createPageOrComp', generateTemplate());
 	// 发起问卷
-	surveyPolicy(emitSurvey);
-	// 绑定访问调查快捷键
-	const disposerSurvey = vscode.commands.registerCommand('recore.survey', emitSurvey);
-	context.subscriptions.push(disposerRlC, disposerCreate, disposerSurvey);
+	// surveyPolicy(emitSurvey);
+	// // 绑定访问调查快捷键
+	// const disposerSurvey = vscode.commands.registerCommand('recore.survey', emitSurvey);
+	context.subscriptions.push(disposerRlC, disposerCreate);
 }
 
 export function deactivate(): Thenable<void> {
