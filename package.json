@@ -1,7 +1,7 @@
 {
   "name": "recore",
   "description": "Recore support for Visual Studio Code",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "MIT",
   "displayName": "Recore",
   "publisher": "alixux",
