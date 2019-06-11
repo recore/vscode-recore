@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.1.13 | 2019-06-11
+
+- Fix bug of vx format with multiple root tags [#issue #75395](http://gitlab.alibaba-inc.com/recore/recore/issues/75395)
+
 ### 0.1.12 | 2019-04-30
 
 - Fix bug of vx format [#issue #58093](http://gitlab.alibaba-inc.com/recore/recore/issues/58093)
