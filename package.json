@@ -1,6 +1,6 @@
 {
-  "name": "recore",
-  "description": "Recore support for Visual Studio Code",
+  "name": "recore-for-theia",
+  "description": "Recore support for Theia",
   "version": "0.1.13",
   "license": "MIT",
   "displayName": "Recore",
