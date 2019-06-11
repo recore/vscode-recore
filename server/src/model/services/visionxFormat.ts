@@ -1,5 +1,5 @@
-import * as prettier from 'prettier';
 import { TextDocument, Range, TextEdit, Position } from 'vscode-languageserver-types';
+import format from '@ali/vx-format';
 
 export function visionxFormat(
   document: TextDocument,
@@ -7,10 +7,7 @@ export function visionxFormat(
 ): TextEdit[] {
   const { value, range } = getValueAndRange(document, currRange);
 
-  const beautifiedVisionX = prettier.format(value, {
-    // @ts-ignore
-    parser: 'visionx-parse',
-  });
+  const beautifiedVisionX = format(value);
   return [
     {
       range,
