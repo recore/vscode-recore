@@ -1,7 +1,7 @@
 {
   "name": "recore-for-theia",
   "description": "Recore support for Theia",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "license": "MIT",
   "displayName": "Recore",
   "publisher": "alixux",
