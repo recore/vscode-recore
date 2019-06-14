@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.1.14 | 2019-06-14
+
+- vx format for supporting NumberLiteral and MemberExpression type
+
 ### 0.1.13 | 2019-06-11
 
 - Fix bug of vx format with multiple root tags [#issue #75395](http://gitlab.alibaba-inc.com/recore/recore/issues/75395)
