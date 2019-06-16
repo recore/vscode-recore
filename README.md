@@ -48,7 +48,7 @@
 
 ## Appreciation
 
-VSCode-Recore is inpired by [Vetur](https://github.com/vuejs/vetur) and [auto-close-tag](https://github.com/formulahendry/vscode-auto-close-tag).
+VSCode-Recore is inspired by [Vetur](https://github.com/vuejs/vetur) and [auto-close-tag](https://github.com/formulahendry/vscode-auto-close-tag).
 
 ## Lisence
 
