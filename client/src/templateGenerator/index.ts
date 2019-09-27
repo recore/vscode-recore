@@ -16,7 +16,7 @@ async function populateTemplate(srcName: string, targetName: string, pathToStore
     }
     const fileContent = String(content).replace(/<%= Name %>/igm, folderName);
     // write file
-    await writeFile(`${pathToStore}/${srcName.replace(/__Name__/ig, targetName)}`, fileContent);
+    await writeFile(`${pathToStore}/${srcName}`, fileContent);
   } catch (err) {
     console.log('populateTemplate', err);
   }
@@ -30,7 +30,7 @@ export default function generateTemplate() {
       const targetName = await showInputBox();
       if (targetName) {
         exec(`cd ${dir} && mkdir ${targetName} && cd ${targetName}`, (error) => {
-          ['__Name__.vx', '__Name__.ts', '__Name__.less'].forEach((srcName) => {
+          ['index.vx', 'index.ts', 'index.less'].forEach((srcName) => {
             populateTemplate(srcName, targetName, `${dir}/${targetName}`);
           });
           if (error) {
