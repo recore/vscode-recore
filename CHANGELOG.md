@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.1.15 | 2019-09-30
+
+- vx format for supporting ObjectExpression type
+
 ### 0.1.14 | 2019-06-14
 
 - vx format for supporting NumberLiteral and MemberExpression type

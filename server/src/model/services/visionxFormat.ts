@@ -1,5 +1,5 @@
 import { TextDocument, Range, TextEdit, Position } from 'vscode-languageserver-types';
-import format from '@ali/my-prettier';
+const format = require('@ali/my-prettier');
 
 export function visionxFormat(
   document: TextDocument,
