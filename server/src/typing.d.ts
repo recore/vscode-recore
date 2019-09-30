@@ -22,3 +22,5 @@ declare module 'eslint' {
 }
 
 declare module '*.json';
+
+declare module '@ali/my-prettier';
