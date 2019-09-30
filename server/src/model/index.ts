@@ -43,7 +43,8 @@ export function getVisionXModel(
       return 'visionx';
     },
     configure(c) {
-      tagProviderSettings = _.assign(tagProviderSettings, c.html.suggest);
+      // tagProviderSettings = _.assign(tagProviderSettings, c.html.suggest);
+      tagProviderSettings = _.assign(tagProviderSettings, {});
       enabledTagProviders = getEnabledTagProviders(tagProviderSettings);
       config = c;
     },
