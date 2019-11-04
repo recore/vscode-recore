@@ -27,7 +27,7 @@
     "@types/node": "^7.10.9",
     "tslint": "^5.8.0",
     "typescript": "^3.6.4",
-    "vsce": "^1.53.0"
+    "vsce": "^1.69.0"
   },
   "engines": {
     "vscode": "^1.20.0"
@@ -74,7 +74,7 @@
         "extensions": [
           ".api.ts"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./languages/typescript.json"
       }
     ],
     "grammars": [
