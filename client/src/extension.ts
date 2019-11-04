@@ -11,6 +11,7 @@ import {
 	RevealOutputChannelOn
 } from 'vscode-languageclient';
 import generateTemplate from './templateGenerator';
+import * as apits from './apits/extension';
 // import emitSurvey from './survey';
 // import surveyPolicy from './survey/policy';
 
@@ -81,9 +82,11 @@ export function activate(context: ExtensionContext) {
 	// const disposerSurvey = vscode.commands.registerCommand('recore.survey', emitSurvey);
 	// context.subscriptions.push(disposerRlC, disposerCreate, disposerSurvey);
   context.subscriptions.push(disposerRlC, disposerCreate);
+  apits.activate(context);
 }
 
 export function deactivate(): Thenable<void> {
+  apits.deactivate();
 	if (!client) {
 		return undefined;
 	}

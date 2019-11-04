@@ -6,7 +6,8 @@
 		"outDir": "out",
 		"rootDir": "src",
 		"lib": [ "es6" ],
-		"sourceMap": true
+    "sourceMap": true,
+    "experimentalDecorators": true
 	},
 	"include": [
 		"src"

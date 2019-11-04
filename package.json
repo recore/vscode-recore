@@ -13,12 +13,16 @@
     "watch": "npm run watch:client && npm run watch:server",
     "watch:client": "tsc -w -p ./client/tsconfig.json",
     "watch:server": "tsc -w -p ./server/tsconfig.json",
-    "compile": "npm run compile:client && npm run compile:server",
+    "compile": "rm -rf client/node_modules/vscode/vscode.d.ts; npm run compile:client && npm run compile:server",
     "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
     "test": "sh ./scripts/e2e.sh",
     "pkg": "vsce package --yarn"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/rimraf": "^2.0.3",
+    "@types/semver": "^6.2.0",
+    "rimraf": "^3.0.0"
+  },
   "devDependencies": {
     "@types/node": "^7.0.43",
     "tslint": "^5.8.0",
@@ -33,6 +37,7 @@
   ],
   "activationEvents": [
     "onLanguage:visionx",
+    "onLanguage:apits",
     "onCommand:recore.createPageOrComp",
     "onCommand:recore.survey"
   ],
@@ -59,6 +64,17 @@
           ".vsx"
         ],
         "configuration": "./languages/visionx.json"
+      },
+      {
+        "id": "apits",
+        "aliases": [
+          "apits",
+          "api.ts"
+        ],
+        "extensions": [
+          ".api.ts"
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -66,6 +82,17 @@
         "language": "visionx",
         "scopeName": "text.html.visionx",
         "path": "./syntaxes/visionx.tmLanguage.json"
+      },
+      {
+        "language": "apits",
+        "scopeName": "source.ts",
+        "path": "./syntaxes/TypeScript.tmLanguage.json",
+        "tokenTypes": {
+          "entity.name.type.instance.jsdoc": "other",
+          "entity.name.function.tagged-template": "other",
+          "meta.import string.quoted": "other",
+          "variable.other.jsdoc": "other"
+        }
       }
     ],
     "iconThemes": [
@@ -129,6 +156,10 @@
       {
         "language": "visionx",
         "path": "./snippets/visionx.json"
+      },
+      {
+        "language": "apits",
+        "path": "./snippets/typescript.json"
       }
     ],
     "commands": [
