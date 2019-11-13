@@ -82,11 +82,11 @@ export default class LanguageProvider extends Disposable {
 		]);
   }
 
-  private whiteList = [1249, 6133];
+  private whiteList = [1249, 6133, 1238];
 
 	private configurationChanged(): void {
     const config = vscode.workspace.getConfiguration(this.id, null);
-    this.whiteList = config.get(whiteListSetting, [1249]);
+    this.whiteList = config.get(whiteListSetting, this.whiteList);
 		this.updateValidate(config.get(validateSetting, true));
     this.updateSuggestionDiagnostics(config.get(suggestionSetting, true));
 	}
