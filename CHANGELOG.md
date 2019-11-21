@@ -3,6 +3,7 @@
 ### 0.1.16 | 2019-11-21
 
 - support completion of components and utils
+- support api.ts
 
 ### 0.1.15 | 2019-09-30
 
