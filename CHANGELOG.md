@@ -1,5 +1,9 @@
 # Change Log
 
+### 0.1.16 | 2019-11-21
+
+- support completion of components and utils
+
 ### 0.1.15 | 2019-09-30
 
 - vx format for supporting ObjectExpression type

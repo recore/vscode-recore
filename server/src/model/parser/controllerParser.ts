@@ -43,7 +43,7 @@ export function findController(vxPath: string): IController {
       ]
     });
     bsInfo = getInfoFromBootStrap(bsSource);
-  } catch (e) {}
+  } catch (e) { }
 
   if (ctlInfo && bsInfo) {
     const ret = {
@@ -79,7 +79,7 @@ function readController(vxPath: string): string | null {
     try {
       code = fs.readFileSync(path, 'utf-8');
       break;
-    } catch (e) {}
+    } catch (e) { }
   }
   return code;
 }
@@ -131,8 +131,37 @@ function parseClass(declaration: any): IController | null {
     // 属性
     classProps.forEach((item: any) => {
       const prop = _.get(item, ['key', 'name'], '');
-      if (!!prop) {
-        properties.push(prop);
+      if (!prop) {
+        return;
+      }
+      properties.push(prop);
+      // 查找组件
+      if (prop === 'components' && item.static) {
+        const propsArr = _.get(item, ['value', 'properties'], []);
+        if (propsArr.length <= 0) {
+          return;
+        }
+        propsArr.forEach((p: any) => {
+          const comp = _.get(p, ['key', 'name'], '');
+          if (!comp) {
+            return;
+          }
+          components.push(comp);
+        });
+      }
+      // 查找utils
+      if (prop === 'utils' && item.static) {
+        const propsArr = _.get(item, ['value', 'properties'], []);
+        if (propsArr.length <= 0) {
+          return;
+        }
+        propsArr.forEach((p: any) => {
+          const util = _.get(p, ['key', 'name'], '');
+          if (!util) {
+            return;
+          }
+          helpers.push(util);
+        });
       }
     });
 
@@ -195,7 +224,7 @@ function readBootStrap(vxPath: string): string {
     try {
       code = fs.readFileSync(path, 'utf-8');
       break;
-    } catch (e) {}
+    } catch (e) { }
   }
   return code;
 }
