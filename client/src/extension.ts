@@ -22,7 +22,11 @@ export function activate(context: ExtensionContext) {
 
 	const config = workspace.getConfiguration();
 
-	config.update('emmet.includeLanguages', {'visionx': 'html'}, true);
+  const emmetConfig = config.get('emmet.includeLanguages');
+  // @ts-ignore
+  if (emmetConfig && emmetConfig.visionx !== 'html' ) {
+    config.update('emmet.includeLanguages', {'visionx': 'html'}, true);
+  }
 
 	// 标签自动闭合、重命名
 	const tagManager = new TagManager();
