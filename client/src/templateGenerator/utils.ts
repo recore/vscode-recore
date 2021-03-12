@@ -1,6 +1,11 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 
+export enum TemplateType {
+  Component = 'component',
+  Page = 'page'
+}
+
 export function getCamelName(name: string) {
   const Name = (name || '').replace(/[-_\s]+(\w)/ig, (_, p) => {
     return p.toUpperCase();
@@ -17,13 +22,23 @@ export function showMessage(message: any, type?: string): void {
   }
 }
 
+export async function showQuickPick(): Promise<string | undefined> {
+  let input;
+  try {
+    input = await vscode.window.showQuickPick([TemplateType.Page, TemplateType.Component], { placeHolder: 'Select the type' });
+  } catch (e) {
+    showMessage(e, 'error');
+  }
+  return input;
+}
+
 export async function showInputBox(): Promise<string | undefined> {
   let input;
   try {
     input = await vscode
       .window
       .showInputBox({
-        prompt: 'Enter name of Recore Page or Component',
+        prompt: 'Enter the name of Recore Page or Component',
         placeHolder: `Recore Page or Component Name`
       });  
   } catch (e) {
