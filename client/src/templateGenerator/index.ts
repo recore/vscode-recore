@@ -36,7 +36,7 @@ export default function generateTemplate() {
       const targetName = await showInputBox();
       if (targetName) {
         exec(`cd ${dir} && mkdir ${targetName} && cd ${targetName}`, async (error) => {
-          for (const srcName of ['index.tsx', 'index.scss']) {
+          for (const srcName of ['index.tsx', 'index.less']) {
             await populateTemplate(type, srcName, targetName, `${dir}/${targetName}`);
           }
           if (error) {

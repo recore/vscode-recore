@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { observer, obx } from '@ali/recore';
-import './index.scss';
+import './index.less';
 
 @observer
 export default class <%= Name %> extends Component<Recore.PageRequest> {

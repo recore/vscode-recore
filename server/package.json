@@ -1,7 +1,7 @@
 {
   "name": "recore-language-server",
   "description": "recore-language-server",
-  "version": "0.1.18",
+  "version": "0.2.0",
   "author": "wuyue",
   "license": "MIT",
   "scripts": {},
